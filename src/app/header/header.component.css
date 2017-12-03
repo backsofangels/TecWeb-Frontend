@@ -1,0 +1,9 @@
+#title{
+    display: inline-block;
+    float: left;
+}
+
+#pages{
+    display: inline-block;
+    float: right;
+}
