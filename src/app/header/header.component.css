@@ -1,9 +1,9 @@
-#title{
+.leftDiv{
     display: inline-block;
     float: left;
 }
 
-#pages{
+.rightDiv{
     display: inline-block;
     float: right;
 }
