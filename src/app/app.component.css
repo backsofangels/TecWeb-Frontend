@@ -1,11 +1,23 @@
+#container{
+    position: absolute;
+    clear: both;
+    top: 100px;
+    left: 20px;
+    right: 20px;
+    height: 600px;
+    background-color: rgba(217, 232, 245, 0.35);
+}
 .leftDiv{
     display: inline-block;
-    float: left;
-    width: 50%;
+    position: relative;
+    left: 2%;
+    width: 45%;
 }
 
 .rightDiv{
     display: inline-block;
-    float: right;
-    width: 50%;
+    position: relative;
+    right: 2%;
+    left: 5%;
+    width: 45%;
 }
