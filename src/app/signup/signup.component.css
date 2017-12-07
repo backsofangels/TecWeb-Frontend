@@ -1,0 +1,9 @@
+#container{
+    position: absolute;
+    clear: both;
+    top: 100px;
+    left: 20px;
+    right: 20px;
+    height: 600px;
+    background-color: rgba(217, 232, 245, 0.35);
+}
