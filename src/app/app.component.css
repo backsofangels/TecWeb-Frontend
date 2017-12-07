@@ -21,3 +21,12 @@
     left: 5%;
     width: 45%;
 }
+
+#footer{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    text-indent: 20px;
+    background-color: rgba(255, 255, 255, 0.30);
+}
