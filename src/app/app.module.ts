@@ -1,21 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { AppRoutingModule } from './app-routing.module';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-
-
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {AppRoutingModule} from './app-routing.module';
+import {SignupComponent} from './signup/signup.component';
+import {LoginComponent} from './login/login.component';
+import {HomeComponent} from './home/home.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {AuthInterceptor} from "./HTTPInterceptor";
 
 @NgModule({
   declarations: [
       AppComponent,
       HeaderComponent,
-      FooterComponent,
       SignupComponent,
       LoginComponent,
       HomeComponent
@@ -23,9 +21,16 @@ import { HomeComponent } from './home/home.component';
   imports: [
       BrowserModule,
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      ReactiveFormsModule,
   ],
-  providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
