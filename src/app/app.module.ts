@@ -16,7 +16,7 @@ import {AuthInterceptor} from "./HTTPInterceptor";
       HeaderComponent,
       SignupComponent,
       LoginComponent,
-      HomeComponent
+      HomeComponent,
   ],
   imports: [
       BrowserModule,

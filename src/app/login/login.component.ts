@@ -13,6 +13,7 @@ export class LoginComponent {
     form: FormGroup;
     private authService: AuthService;
     private router: Router;
+    private errorLogin: boolean;
 
     constructor(private fb: FormBuilder) {
 
@@ -33,7 +34,8 @@ export class LoginComponent {
                         this.router.navigateByUrl('/');
                     },
                     () => {
-
+                        console.log("User log failed");
+                        this.errorLogin = true;
                     }
                 );
         }

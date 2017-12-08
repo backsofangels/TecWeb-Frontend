@@ -1,4 +1,5 @@
-<div style="clear: both">
+<div>
+    <p *ngIf="errorLogin">Username o password non corretti</p>
     <form [formGroup]="form">
         <fieldset>
             <legend>Login</legend>

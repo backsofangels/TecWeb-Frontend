@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import * as moment from "moment";
+import {User} from "./user";
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,6 @@ export class AuthService {
         return this.http.post<User>('/api/login', {email, password})
         // this is just the HTTP call,
         // we still need to handle the reception of the token
-            .shareReplay();
     }
 
     logout() {
