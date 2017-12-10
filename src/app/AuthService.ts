@@ -42,9 +42,8 @@ export class AuthService {
          return moment(expiresAt);
      }   */
 
-    getPreferredDrillMeasurements() {
-        const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-        this.http.get('/drill/measurement/:' + drillID).subscribe(data => {
+    getlMeasurementsbyDrill(ID: number) {
+        this.http.get('/drill/measurement/:' + ID).subscribe(data => {
             // Prendere l'arraylist e ritornarlo
         });
     }

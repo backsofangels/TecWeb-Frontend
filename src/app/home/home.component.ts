@@ -37,7 +37,8 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
-            this.auth.getPreferredDrillMeasurements();
+            const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            this.clickedMarker(drillID);
         } else {
             this.http.get<Array<Drill>>("/api/get/drill/all").subscribe(data => {
                 this.markers = data;    // Non sono sicuro funzioni perchè il backend ritorna una lista al posto di
@@ -45,7 +46,8 @@ export class HomeComponent implements OnInit {
         }
   }
 
-    clickedMarker(ID: string) {
+    clickedMarker(ID: number) {
+        this.auth.getlMeasurementsbyDrill(ID);
         this.markerClicked = true;
         console.log(`clicked the marker: ${ID}`)
     }
