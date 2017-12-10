@@ -30,7 +30,6 @@ export class AuthService {
             loggedIn = false;
         });
         return loggedIn;
-
     }
 
     isLoggedOut(): boolean {
@@ -42,7 +41,7 @@ export class AuthService {
          return moment(expiresAt);
      }   */
 
-    getlMeasurementsbyDrill(ID: number) {
+    getMeasurementsbyDrill(ID: number) {
         this.http.get('/drill/measurement/:' + ID).subscribe(data => {
             // Prendere l'arraylist e ritornarlo
         });

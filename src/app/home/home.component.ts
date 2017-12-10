@@ -47,9 +47,9 @@ export class HomeComponent implements OnInit {
   }
 
     clickedMarker(ID: number) {
-        this.auth.getlMeasurementsbyDrill(ID);
-        this.markerClicked = true;
         console.log(`clicked the marker: ${ID}`)
+        this.auth.getMeasurementsbyDrill(ID);
+        this.markerClicked = true;
     }
 
 }
