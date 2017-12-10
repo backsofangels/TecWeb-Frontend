@@ -1,28 +1,21 @@
 <div id="container">
-  <div>
-    <div class="leftDiv">
+    <div>
+
+    </div>
+    <div class="leftDiv" style="height: 90%">
+        <!-- this creates a google map on the page with the given lat/lng from -->
+        <!-- the component as the initial center of the map: -->
+        <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6">
+            <agm-marker
+                    *ngFor="let m of markers;"
+                    (markerClick)="clickedMarker(m.ID)"
+                    [latitude]="m.lat"
+                    [longitude]="m.lng">
+            </agm-marker>
+        </agm-map>
+    </div>
+    <div *ngIf="markerClicked" class="rightDiv">
         <h2>Ultimi rilevamenti:</h2>
         <p>roba</p>
     </div>
-    <div class="rightDiv">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget nisl ex. Pellentesque habitant morbi tristique
-            senectus et netus et malesuada fames ac turpis egestas. Aenean massa quam, laoreet nec gravida id, bibendum
-            vel mauris. Integer nec pellentesque tortor. Curabitur in dui viverra, rhoncus metus at, dignissim mi. Nulla
-            turpis augue, varius ornare varius vitae, pretium ac orci. Curabitur orci tortor, posuere et tristique ut,
-            malesuada ac leo.</p>
-    </div>
-  </div>
-  <div style="clear: both">
-    <div class="leftDiv">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget nisl ex. Pellentesque habitant morbi tristique
-            senectus et netus et malesuada fames ac turpis egestas. Aenean massa quam, laoreet nec gravida id, bibendum
-            vel mauris. Integer nec pellentesque tortor. Curabitur in dui viverra, rhoncus metus at, dignissim mi. Nulla
-            turpis augue, varius ornare varius vitae, pretium ac orci. Curabitur orci tortor, posuere et tristique ut,
-            malesuada ac leo.</p>
-    </div>
-    <div class="rightDiv">
-        <h2>Ultimi rilevamenti:</h2>
-        <p>roba</p>
-    </div>
-  </div>
 </div>

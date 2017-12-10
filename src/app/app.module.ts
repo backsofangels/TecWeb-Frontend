@@ -9,6 +9,7 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./HTTPInterceptor";
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import {AuthInterceptor} from "./HTTPInterceptor";
       HttpClientModule,
       AppRoutingModule,
       ReactiveFormsModule,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyB1ReyfWAk7TFdyJmQC2MFvRurLWoHgQCM'
+      })
   ],
     providers: [
         {

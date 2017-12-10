@@ -1,7 +1,9 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-//import * as moment from "moment";
+//import { MomentModule } from 'angular2-moment';
 import {User} from "./user";
+import "rxjs/add/operator/do";
+import {jwt} from "jsonwebtoken"
 
 @Injectable()
 export class AuthService {
@@ -10,34 +12,48 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<User>('/api/login', {email, password})
-        // this is just the HTTP call,
-        // we still need to handle the reception of the token
+        return this.http.post<User>('/auth/login', {email, password})
+            .do(res => this.setSession);
     }
 
-    logout() {
+    logout(): void {
+        localStorage.removeItem("user");
         localStorage.removeItem("id_token");
-        localStorage.removeItem("expires_at");
+        //    localStorage.removeItem("expires_at");
     }
 
-    public isLoggedIn() {
-        return moment().isBefore(this.getExpiration());
+    public isLoggedIn(): boolean {
+        let loggedIn: boolean;
+        this.http.get("/auth/me").subscribe(res => {
+            loggedIn = true;
+        }, err => {
+            loggedIn = false;
+        });
+        return loggedIn;
+
     }
 
-    isLoggedOut() {
+    isLoggedOut(): boolean {
         return !this.isLoggedIn();
     }
 
-    getExpiration() {
-        const expiration = localStorage.getItem("expires_at");
-        const expiresAt = JSON.parse(expiration);
-        return moment(expiresAt);
+    /* getExpiration() {
+         const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+         return moment(expiresAt);
+     }   */
+
+    getPreferredDrillMeasurements() {
+        const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+        this.http.get('/drill/measurement/:' + drillID).subscribe(data => {
+            // Prendere l'arraylist e ritornarlo
+        });
     }
 
-    private setSession(authResult) {
-        const expiresAt = moment().add(authResult.expiresIn, 'second');
-
+    private setSession(authResult): void {
+        //    const expiresAt = moment().add(authResult.expiresIn, 'second');
+        const decoded = jwt.decode(authResult.idToken);
+        localStorage.setItem('user', JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
         localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+        //   localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
     }
 }
