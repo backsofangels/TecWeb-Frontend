@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-//import { MomentModule } from 'angular2-moment';
+import { MomentModule } from 'angular2-moment';
 import {User} from "./user";
 import "rxjs/add/operator/do";
 import {jwt} from "jsonwebtoken"

@@ -1,0 +1,18 @@
+p{
+    position: relative;
+    margin-left: 35%;
+}
+h1 {
+    text-align: center;
+}
+#profileButton{
+    position: absolute;
+    left: 45%;
+    right: -45%;
+    height: 50px;
+    width: 10%;
+}
+#secondPosition{
+    position: absolute;
+    margin-left: 50%;
+}

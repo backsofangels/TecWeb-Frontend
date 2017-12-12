@@ -10,6 +10,8 @@ import {HomeComponent} from './home/home.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./HTTPInterceptor";
 import {AgmCoreModule} from '@agm/core';
+import { ProfileComponent } from './profile/profile.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import {AgmCoreModule} from '@agm/core';
       SignupComponent,
       LoginComponent,
       HomeComponent,
+      ProfileComponent,
   ],
   imports: [
       BrowserModule,
