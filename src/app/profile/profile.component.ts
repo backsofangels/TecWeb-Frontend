@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  regioni = ['Really Smart', 'Super Flexible',
-  'Super Hot', 'Weather Changer'];
+  regioni = ['Milano', 'Napoli', 'Roma'];
 
   constructor() { }
 

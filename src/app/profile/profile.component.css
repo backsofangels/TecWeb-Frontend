@@ -1,18 +1,19 @@
 p{
-    position: relative;
-    margin-left: 35%;
+    text-align: center;
 }
 h1 {
     text-align: center;
 }
 #profileButton{
     position: absolute;
-    left: 45%;
-    right: -45%;
+    left: 42%;
+    right: -40%;
     height: 50px;
-    width: 10%;
+    width: 15%;
+    background-color: #304269;
+    color: white;
 }
-#secondPosition{
-    position: absolute;
-    margin-left: 50%;
+.input{
+    width: 200px;
+    height: 30px;
 }

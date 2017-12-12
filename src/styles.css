@@ -2,6 +2,7 @@
 body{
     background-image: url(./assets/images/WallpaperAll.png);
     background-attachment: scroll;
+    color: #304269;
 }
 
 a:link {
