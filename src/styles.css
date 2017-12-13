@@ -21,3 +21,15 @@ a:link {
     height: 600px;
     background-color: rgba(217, 232, 245, 0.35);
 }
+
+.button-primary{
+    height: 50px;
+    width: 200px;
+    background-color: #304269;
+    color: white;
+}
+
+.input{
+    width: 250px;
+    height: 30px;
+}

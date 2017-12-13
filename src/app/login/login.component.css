@@ -5,19 +5,10 @@
     width: 30%;
 }
 
-.button-primary{
-    height: 50px;
-    width: 50%;
-    background-color: #304269;
-    color: white;
-}
-
 .input{
     position: absolute;
     left: 10%;
-    right: -10%;
-    width: 80%;
-    height: 30px;
+    width: 85%;
 }
 
 .form-field{
