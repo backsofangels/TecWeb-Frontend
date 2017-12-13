@@ -22,6 +22,13 @@ a:link {
     background-color: rgba(217, 232, 245, 0.35);
 }
 
+#innerContainer{
+    position: relative;
+    left: 25%;
+    width: 50%;
+    text-align: center;
+}
+
 .button-primary{
     height: 50px;
     width: 200px;
@@ -32,4 +39,8 @@ a:link {
 .input{
     width: 250px;
     height: 30px;
+}
+
+.form-field{
+    height: 40px;
 }

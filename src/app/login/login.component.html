@@ -1,22 +1,20 @@
-<div id="container">
-  <p *ngIf="errorLogin">Username o password non corretti</p>
-  <form [formGroup]="form" >
-    <fieldset id="loginContainer">
-      <legend>Benvenuto!</legend>
-      <div class="form-field">
-        <img src="./assets/images/userimage.png">
-        <input name="email" formControlName="email" class="input" placeholder="Email">
-      </div>
-      <div class="form-field">
-        <img src="./assets/images/passwordimage.png">
-        <input name="password" formControlName="password"
-                type="password" class="input" placeholder="Password">
-      </div>
-      <div class="form-buttons" id="loginButton">
-        <button class="button-primary"
-                (click)="login()">Login
-        </button>
-      </div>
-    </fieldset>
-  </form>
-</div>
+<p *ngIf="errorLogin">Username o password non corretti</p>
+<form [formGroup]="form" >
+  <fieldset id="innerContainer">
+    <legend><h1>Benvenuto!</h1></legend>
+    <div class="form-field">
+      <img src="./assets/images/userimage.png">
+      <input name="email" formControlName="email" class="input" placeholder="Email">
+    </div>
+    <div class="form-field">
+      <img src="./assets/images/passwordimage.png">
+      <input name="password" formControlName="password"
+              type="password" class="input" placeholder="Password">
+    </div>
+    <div class="form-buttons">
+      <button class="button-primary"
+              (click)="login()">Login
+      </button>
+    </div>
+  </fieldset>
+</form>

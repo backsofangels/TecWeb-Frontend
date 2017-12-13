@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthService} from "../AuthService";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../AuthService';
 
 @Component({
   selector: 'app-login',
@@ -30,11 +30,11 @@ export class LoginComponent {
             this.authService.login(val.email, val.password)
                 .subscribe(
                     () => {
-                        console.log("User is logged in");
+                        console.log('User is logged in');
                         this.router.navigateByUrl('/');
                     },
                     () => {
-                        console.log("User log failed");
+                        console.log('User log failed');
                         this.errorLogin = true;
                     }
                 );

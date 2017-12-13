@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../AuthService";
-import {HttpClient} from "@angular/common/http";
+import {AuthService} from '../AuthService';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
             const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
             this.clickedMarker(drillID);
         } else {
-            this.http.get<Array<Drill>>("/api/get/drill/all").subscribe(data => {
+            this.http.get<Array<Drill>>('/api/get/drill/all').subscribe(data => {
                 this.markers = data;    // Non sono sicuro funzioni perchè il backend ritorna una lista al posto di
             });                         // un array
         }
