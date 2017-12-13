@@ -3,6 +3,7 @@ body{
     background-image: url(./assets/images/WallpaperAll.png);
     background-attachment: scroll;
     color: #304269;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 a:link {

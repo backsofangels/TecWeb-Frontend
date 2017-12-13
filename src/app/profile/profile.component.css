@@ -1,13 +1,7 @@
-p{
-    text-align: center;
-}
-h1 {
+div{
     text-align: center;
 }
 #profileButton{
-    position: absolute;
-    left: 42%;
-    right: -40%;
     height: 50px;
     width: 15%;
     background-color: #304269;

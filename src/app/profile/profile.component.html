@@ -1,25 +1,25 @@
 <div id="container">
   <div id="profile">
-      <h1>Username</h1>
-      <p>Cambia Email
-        <input name="email" formControlName="email" class="input" placeholder="Nuova Email">
-        <input name="email" formControlName="email" class="input" placeholder="Ripeti nuova Email">
-      </p>
-      <p>Cambia password
-        <input name="password" formControlName="password"
-                  type="password" class="input" placeholder="Nuova Password">
-        <input name="password" formControlName="password"
-                  type="password" class="input" placeholder="Ripeti nuova Password">
-      </p>
-      <p>Cambia località
-      <select class="form-control" id="regioni" required>
-          <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
-        </select>
-      <select class="form-control" id="regioni" required>
-          <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
-        </select>
-      </p>
-      <p>Abilita avvisi allarmi <input type="checkbox" name="allarmi" value="1" /></p>
-      <button class="button-primary" id="profileButton"> Conferma </button>
+    <h1>Username</h1>
+    <p>Cambia Email
+      <input name="email" formControlName="email" class="input" placeholder="Nuova Email">
+      <input name="email" formControlName="email" class="input" placeholder="Ripeti nuova Email">
+    </p>
+    <p>Cambia password
+      <input name="password" formControlName="password"
+                type="password" class="input" placeholder="Nuova Password">
+      <input name="password" formControlName="password"
+                type="password" class="input" placeholder="Ripeti nuova Password">
+    </p>
+    <p>Cambia località
+    <select class="form-control" id="regioni" required>
+        <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
+      </select>
+    <select class="form-control" id="regioni" required>
+        <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
+      </select>
+    </p>
+    <p>Abilita avvisi allarmi <input type="checkbox" name="allarmi" value="1" /> </p>
+    <button class="button-primary" id="profileButton"> Conferma </button>
   </div>
 </div>

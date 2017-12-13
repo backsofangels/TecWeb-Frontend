@@ -6,9 +6,6 @@
 }
 
 .button-primary{
-    position: absolute;
-    left: 20%;
-    right: -20%;
     height: 50px;
     width: 50%;
     background-color: #304269;
@@ -25,4 +22,8 @@
 
 .form-field{
     height: 40px;
+}
+
+#loginButton{
+    text-align: center;
 }
