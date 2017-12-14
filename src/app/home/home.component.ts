@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
     clickedMarker(ID: number) {
-        console.log(`clicked the marker: ${ID}`)
+        console.log(`clicked the marker: ${ID}`);
         this.auth.getMeasurementsbyDrill(ID);
         this.markerClicked = true;
     }

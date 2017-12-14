@@ -36,6 +36,13 @@ a:link {
     color: white;
 }
 
+.button-secondary{
+    height: 25px;
+    width: 100%;
+    background-color: #304269;
+    color: white;
+}
+
 .input{
     width: 250px;
     height: 30px;
@@ -43,4 +50,9 @@ a:link {
 
 .form-field{
     height: 40px;
+}
+
+.form-control{
+    height: 30px;
+    width: 250px;
 }

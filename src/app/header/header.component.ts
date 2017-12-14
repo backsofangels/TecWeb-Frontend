@@ -11,8 +11,9 @@ import {HttpClient} from '@angular/common/http';
 export class HeaderComponent implements OnInit {
 
   private markerClicked: boolean;
-
-  constructor() { }
+  private auth: AuthService = new AuthService(this.http);
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.clickedMarker(6);

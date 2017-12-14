@@ -5,9 +5,19 @@
         <agm-marker
             *ngFor="let m of markers;"
             (markerClick)="clickedMarker(m.ID)"
+            [title]="m.ID"
             [latitude]="m.lat"
             [longitude]="m.lng">
+            <agm-info-window>
+            <div class="form-buttons">
+                <p>{{m.ID}}</p>
+                <button class="button-secondary"
+                        (click)="add()">Attiva avvisi
+                </button>
+            </div>
+        </agm-info-window>
         </agm-marker>
+        
     </agm-map>
 </div>
 <div *ngIf="markerClicked" class="rightDiv">

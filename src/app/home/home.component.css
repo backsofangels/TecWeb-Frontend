@@ -3,6 +3,7 @@
     position: relative;
     left: 2%;
     width: 45%;
+    top: 5%;
 }
 
 .rightDiv{
@@ -11,6 +12,7 @@
     right: 2%;
     left: 5%;
     width: 45%;
+    top: 2%;
     vertical-align: top;
 }
 agm-map {
