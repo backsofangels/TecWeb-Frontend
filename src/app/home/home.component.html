@@ -5,22 +5,31 @@
         <agm-marker
             *ngFor="let m of markers;"
             (markerClick)="clickedMarker(m.ID)"
-            [title]="m.ID"
+            [label]="m.ID"
             [latitude]="m.lat"
             [longitude]="m.lng">
-            <agm-info-window>
+            <agm-info-window *ngIf="loggedUser">
             <div class="form-buttons">
-                <p>{{m.ID}}</p>
-                <button class="button-secondary"
-                        (click)="add()">Attiva avvisi
+                <button *ngIf="markerFavorities!=m.ID"
+                        class="button-secondary"
+                        (click)="addFavorities(m.ID)">Attiva avvisi
+                </button>
+                <button *ngIf="markerFavorities==m.ID"
+                        class="button-secondary"
+                        (click)="removeFavorities(m.ID)">Disattiva avvisi
                 </button>
             </div>
         </agm-info-window>
         </agm-marker>
-        
     </agm-map>
 </div>
 <div *ngIf="markerClicked" class="rightDiv">
     <h2>Ultimi rilevamenti:</h2>
-    <p>roba</p>
+    <p>Sonda: {{markerID}}</p>
+    <div *ngIf="sondaAdded" class="rightDiv">
+        <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
+    </div>
+    <div *ngIf="!sondaAdded" class="rightDiv">
+        <p> Hai disattivato l'avviso per la sonda </p>
+    </div>
 </div>

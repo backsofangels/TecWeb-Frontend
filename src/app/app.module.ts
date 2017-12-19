@@ -7,11 +7,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {SignupComponent} from './signup/signup.component';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {AuthInterceptor} from "./HTTPInterceptor";
+import {ReactiveFormsModule} from '@angular/forms';
+import {AuthInterceptor} from './HTTPInterceptor';
 import {AgmCoreModule} from '@agm/core';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

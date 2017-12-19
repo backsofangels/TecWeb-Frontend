@@ -8,6 +8,8 @@ import {jwt} from 'jsonwebtoken';
 @Injectable()
 export class AuthService {
 
+    results: string[];
+
     constructor(private http: HttpClient) {
     }
 
@@ -43,7 +45,7 @@ export class AuthService {
 
     getMeasurementsbyDrill(ID: number) {
         this.http.get('/drill/measurement/:' + ID).subscribe(data => {
-            // Prendere l'arraylist e ritornarlo
+            this.results = data['results'];
         });
     }
 

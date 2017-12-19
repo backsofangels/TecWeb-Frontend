@@ -1,21 +1,25 @@
 <fieldset id="innerContainer">
   <legend><h1>Username</h1></legend>
-  <p>Cambia Email
-    <input name="email" formControlName="email" class="input" placeholder="Nuova Email">
-    <input name="email" formControlName="email" class="input" placeholder="Ripeti nuova Email">
-  </p>
-  <p>Cambia password
-    <input name="password" formControlName="password"
-              type="password" class="input" placeholder="Nuova Password">
-    <input name="password" formControlName="password"
-              type="password" class="input" placeholder="Ripeti nuova Password">
-  </p>
-  <p>Cambia località
-    <select class="form-control" id="regioni" required>
-        <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
-      </select>
-  </p>
-  <p>Abilita avvisi allarmi <input type="checkbox" name="allarmi" value="1" /> </p>
+  <table>
+    <tr>
+      <td>Cambia Email</td>
+      <td><input name="email" formControlName="email" class="input" placeholder="Nuova Email"></td>
+      <td><input name="email" formControlName="email" class="input" placeholder="Ripeti nuova Email"></td>
+    </tr>
+    <tr>
+      <td>Cambia password</td>
+      <td><input name="password" formControlName="password"
+                type="password" class="input" placeholder="Nuova Password"></td>
+      <td><input name="password" formControlName="password"
+                type="password" class="input" placeholder="Ripeti nuova Password"></td>
+    </tr>
+  </table>
+      <p>Cambia località
+        <select class="form-control" id="regioni" required>
+          <option *ngFor="let reg of regioni" [value]="reg">{{reg}}</option>
+        </select>
+      </p>
+  <p>Abilita avvisi allarmi <input type="checkbox" name="allarmi" value="1"/> </p>
   <button class="button-primary"> Conferma </button>
 </fieldset>
 
