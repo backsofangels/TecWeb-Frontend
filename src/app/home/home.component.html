@@ -26,10 +26,11 @@
 <div *ngIf="markerClicked" class="rightDiv">
     <h2>Ultimi rilevamenti:</h2>
     <p>Sonda: {{markerID}}</p>
+    <p>Rilevamento {{markerName}}</p>
     <div *ngIf="sondaAdded" class="rightDiv">
         <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
     </div>
-    <div *ngIf="!sondaAdded" class="rightDiv">
+    <div *ngIf="sondaRemoved" class="rightDiv">
         <p> Hai disattivato l'avviso per la sonda </p>
     </div>
 </div>

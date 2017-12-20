@@ -35,8 +35,10 @@ export class HomeComponent implements OnInit {
     ];
 
     private markerID: number;
+    private markerName: number;
     private markerFavorities: number;
     private sondaAdded: boolean;
+    private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http);
 
@@ -60,12 +62,27 @@ export class HomeComponent implements OnInit {
         this.auth.getMeasurementsbyDrill(ID);
         this.markerClicked = true;
         this.markerID = ID;
+
+        // console.log('Anche CACCA' + measurementByDrillId);
+        // const misurementi = JSON.stringify(measurementByDrillId);
+        // console.log('Questa cacca' + misurementi);
+        // const datamis = JSON.parse(misurementi);
+        // const qualcosa = datamis.pollutantID;
+        // const altro = JSON.stringify(qualcosa);
+        // console.log('CACCA!! ' + qualcosa);
+        // console.log('cacche tante ' + altro);
+
+
+
     }
+
     addFavorities(ID: number) {
         this.sondaAdded = true;
+        this.sondaRemoved = false;
         this.markerFavorities = ID;
     }
     removeFavorities(ID: number) {
+        this.sondaRemoved = true;
         this.sondaAdded = false;
         this.markerFavorities = -1;
     }
@@ -75,4 +92,13 @@ interface Drill {
     lat: number;
     lng: number;
     ID: number;
+}
+
+interface Measurement {
+    measurementDate: string;
+    pollutantMonitored: string[];
+    pollutantID: number;
+    pollutantName: string;
+    maximumThreshold: number;
+    quantityMeasured: number;
 }
