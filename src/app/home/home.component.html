@@ -8,14 +8,19 @@
         <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6">
             <agm-marker
                     *ngFor="let m of markers;"
-                    (markerClick)="clickedMarker(m.ID)"
+                    (markerClick)="clickedMarker(m.drillIdentifier)"
                     [latitude]="m.lat"
                     [longitude]="m.lng">
             </agm-marker>
         </agm-map>
     </div>
-    <div *ngIf="markerClicked" class="rightDiv">
+    <div class="rightDiv" *ngIf="markerClicked" class="rightDiv">
         <h2>Ultimi rilevamenti:</h2>
-        <p>roba</p>
+            <pre class="dataDisplay" *ngFor="let measurement of measure">
+                    <i>Data misurazione:</i> {{measurement.measurementDate}}
+                    <i>Nome inquinante:</i> {{measurement.pollutantMonitored.pollutantName}}
+                    <i>Quantità:</i> {{measurement.quantityMeasured}} mg/m3
+                    <i>Quantità massima:</i> {{measurement.pollutantMonitored.maximumThreshold}}
+            </pre>
     </div>
 </div>

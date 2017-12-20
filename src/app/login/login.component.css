@@ -1,4 +1,5 @@
 #loginContainer{
+    top: 30px;
     position: absolute;
     left: 35%;
     margin-right: -35%;
@@ -6,6 +7,7 @@
 }
 
 .button-primary{
+    font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     left: 20%;
     right: -20%;
@@ -14,6 +16,7 @@
 }
 
 .input{
+    font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     left: 10%;
     right: -10%;

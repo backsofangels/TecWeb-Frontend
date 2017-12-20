@@ -10,6 +10,9 @@ import {HomeComponent} from './home/home.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./HTTPInterceptor";
 import {AgmCoreModule} from '@agm/core';
+import { ModelComponent } from './model/model.component';
+import { MocksComponent } from './mocks/mocks.component';
+import { ServicesComponent } from './services/services.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import {AgmCoreModule} from '@agm/core';
       SignupComponent,
       LoginComponent,
       HomeComponent,
+      ModelComponent,
+      MocksComponent,
+      ServicesComponent,
   ],
   imports: [
       BrowserModule,
