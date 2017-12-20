@@ -10,6 +10,9 @@ import {HomeComponent} from './home/home.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './HTTPInterceptor';
 import {AgmCoreModule} from '@agm/core';
+import { ModelComponent } from './model/model.component';
+import { MocksComponent } from './mocks/mocks.component';
+import { ServicesComponent } from './services/services.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 
@@ -21,6 +24,9 @@ import { FormsModule } from '@angular/forms';
       LoginComponent,
       HomeComponent,
       ProfileComponent,
+      ModelComponent,
+      MocksComponent,
+      ServicesComponent,
   ],
   imports: [
       BrowserModule,
