@@ -9,11 +9,10 @@
 .rightDiv{
     display: inline-block;
     position: relative;
-    top: -400px;
     right: 2%;
     left: 5%;
     width: 45%;
-    top: 2%;
+    top: 5%;
     vertical-align: top;
 }
 
@@ -29,7 +28,7 @@ agm-map {
 }
 
 #map{
-    border: 25px solid #9292922a;
+    border: 20px solid #9292922a;
     border-top-left-radius: 26px 35px;
     border-top-right-radius: 26px 35px;
     border-bottom-left-radius: 26px 35px;
@@ -44,4 +43,14 @@ agm-map {
 
 #rowAlert{
     background-color: rgb(255, 241, 119);
+}
+
+.tableResults{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+.tableResults td{
+    border: 1px solid #00000070;
+    padding: 8px;
 }

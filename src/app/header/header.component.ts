@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
     clickedMarker(ID: number) {
-      if (ID > 5) {
+      if (ID < 5) {
         this.markerClicked = true;
         this.userLogged = true;
       } else {

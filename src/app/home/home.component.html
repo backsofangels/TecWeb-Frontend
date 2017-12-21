@@ -23,28 +23,36 @@
         </agm-marker>
     </agm-map>
 </div>
+<div *ngIf="!markerClicked" class="rightDiv">
+    <h1>
+        Clicca su una sonda per visualizzarne gli ultimi rilevamenti!
+    </h1>
+</div>
 <div *ngIf="markerClicked" class="rightDiv">
     <fieldset>
-        <legend><h2>Ultimi rilevamenti:</h2></legend>
+        <legend id="center"><h2>Ultimi rilevamenti:</h2></legend>
         <p>Sonda: {{markerID}}</p>
         <div class="measurementDisplay">
-            <table >
+            <table class="tableResults">
                 <thead>
                     <tr>
+                        <td>Sonda:</td>
                         <td>Data misurazione: </td>
                         <td>Nome inquinante: </td>
                         <td>Quantità: </td>
                     </tr>
-                    <hr align=”left” size=”1″ width=”100%″ noshade>
                 </thead>
+                <br>
                 <tbody *ngFor="let m of measure" id="tableBody">
-                    <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" id="rowAlert">
+                    <tr *ngIf="m.pollutantMonitored.pollutantID==markerID && m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
+                        id="rowAlert">
+                        <td> {{m.pollutantMonitored.pollutantID}} <img id="alertImg" src="assets/images/alert.png"></td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
-                        <!-- <img id="alertImg" src="assets/images/alert.png"> -->
                     </tr>
-                    <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
+                    <tr *ngIf="m.pollutantMonitored.pollutantID==markerID && m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
+                        <td> {{m.pollutantMonitored.pollutantID}} </td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
@@ -54,9 +62,10 @@
             </table>
         </div>
     </fieldset>
+
     <div>
         <fieldset>
-            <legend><h2>Cerca per data:</h2></legend>
+            <legend id="center"><h2>Cerca per data:</h2></legend>
             <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
             <input type="datetime-local" name="fromDate" max="1979-12-31" class="calendar"><br></div>
             <div class="rightDiv"><p>Enter a date after 2000-01-01:</p>
@@ -65,6 +74,7 @@
         </fieldset>
     </div>
 
+    <!-- div da eliminare -->
     <div *ngIf="sondaAdded">
         <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
     </div>
