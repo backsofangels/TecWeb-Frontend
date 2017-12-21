@@ -1,11 +1,6 @@
 .leftDiv{
     display: inline-block;
     position: relative;
-    border: 25px solid #9292922a;
-    border-top-left-radius: 26px 35px;
-    border-top-right-radius: 26px 35px;
-    border-bottom-left-radius: 26px 35px;
-    border-bottom-right-radius: 26px 35px;
     left: 2%;
     width: 45%;
     top: 5%;
@@ -27,7 +22,26 @@ agm-map {
     top: 0px;
     height: 100%;
 }
+
 .measurementDisplay{
     height: 200px;
     overflow: scroll;
+}
+
+#map{
+    border: 25px solid #9292922a;
+    border-top-left-radius: 26px 35px;
+    border-top-right-radius: 26px 35px;
+    border-bottom-left-radius: 26px 35px;
+    border-bottom-right-radius: 26px 35px;
+    height: 90%;
+}
+
+#alertImg{
+    height: 20px;
+    width: 20px;
+}
+
+#rowAlert{
+    background-color: rgb(255, 241, 119);
 }

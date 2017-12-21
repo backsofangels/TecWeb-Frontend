@@ -62,5 +62,9 @@ a:link {
 
 .calendar{
     height: 30px;
-    width: 250px;
+    width: 100%;
+}
+
+#center{
+    text-align: center;
 }

@@ -1,7 +1,7 @@
-<div class="leftDiv" style="height: 90%">
+<div class="leftDiv" id="map">
     <!-- this creates a google map on the page with the given lat/lng from -->
     <!-- the component as the initial center of the map: -->
-    <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6">
+    <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6" >
         <agm-marker
             *ngFor="let m of markers;"
             (markerClick)="clickedMarker(m.drillIdentifier)"
@@ -42,7 +42,7 @@
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
-                        <td> allarme, monitorazione fuori scala</td>
+                        <!-- <img id="alertImg" src="assets/images/alert.png"> -->
                     </tr>
                     <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
                         <td> {{m.measurementDate}} </td>
@@ -54,6 +54,16 @@
             </table>
         </div>
     </fieldset>
+    <div>
+        <fieldset>
+            <legend><h2>Cerca per data:</h2></legend>
+            <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
+            <input type="datetime-local" name="fromDate" max="1979-12-31" class="calendar"><br></div>
+            <div class="rightDiv"><p>Enter a date after 2000-01-01:</p>
+            <input type="datetime-local" name="toDate" min="2000-01-02" class="calendar"><br><br></div>
+            <div id="center"><button class="button-primary">Cerca</button></div>
+        </fieldset>
+    </div>
 
     <div *ngIf="sondaAdded">
         <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
@@ -62,12 +72,4 @@
         <p> Hai disattivato l'avviso per la sonda </p>
     </div>
 
-    <div>
-        <h2>Cerca per data:</h2>
-        Enter a date before 1980-01-01:<br>
-            <input type="datetime-local" name="fromDate" max="1979-12-31" class="calendar"><br><br>
-            Enter a date after 2000-01-01:<br>
-            <input type="datetime-local" name="toDate" min="2000-01-02" class="calendar"><br><br>
-        <button class="button-primary">Cerca</button>
-    </div>
 </div>
