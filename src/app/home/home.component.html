@@ -26,16 +26,46 @@
 <div *ngIf="markerClicked" class="rightDiv">
     <h2>Ultimi rilevamenti:</h2>
     <p>Sonda: {{markerID}}</p>
-    <pre class="measurementDisplay" *ngFor="let measurement of measure">
-        Data misurazione: {{measurement.measurementDate}}
-        Nome inquinante: {{measurement.pollutantMonitored.pollutantName}}
-        Quantità: {{measuement.quantityMeasured}} mg/m3
-        Quantità massima: {{measurement.pollutantMonitored.maximumThreshold}}
-    </pre>
+    <div class="measurementDisplay" >
+        <table >
+            <thead>
+                <tr>
+                    <td>Data misurazione: </td>
+                    <td>Nome inquinante: </td>
+                    <td>Quantità: </td>
+                </tr>
+                <hr align=”left” size=”1″ width=”100%″ noshade>
+            </thead>
+            <tbody *ngFor="let m of measure">
+                <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" bgcolor="yellow">
+                    <td> {{m.measurementDate}} </td>
+                    <td> {{m.pollutantMonitored.pollutantName}} </td>
+                    <td> {{m.quantityMeasured}} mg/m3 </td>
+                    <td> allarme, monitorazione fuori scala</td>
+                </tr>
+                <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
+                    <td> {{m.measurementDate}} </td>
+                    <td> {{m.pollutantMonitored.pollutantName}} </td>
+                    <td> {{m.quantityMeasured}} mg/m3 </td>
+                </tr>
+                <!-- <p>Quantità massima: {{m.pollutantMonitored.maximumThreshold}}</p> -->
+            </tbody>
+        </table>
+        
+    </div>
     <div *ngIf="sondaAdded" class="rightDiv">
         <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
     </div>
     <div *ngIf="sondaRemoved" class="rightDiv">
-        <p> Hai disattivato l'avviso per la sonda </p>
+        <p> Hai disattivato l'avviso per la sonda {{markerFavorities}} </p>
+    </div>
+    <div>
+        <h2>Cerca per data:</h2>
+        Enter a date before 1980-01-01:<br>
+            <input type="date" name="bday" max="1979-12-31"><br><br>
+            Enter a date after 2000-01-01:<br>
+            <input type="date" name="bday" min="2000-01-02"><br><br>
+            
+        <button class="button-primary">Cerca</button>
     </div>
 </div>

@@ -59,13 +59,17 @@ export class HomeComponent implements OnInit {
         });
         this.markerClicked = true;
         this.markerID = ID;
+        console.log(this.measure);
     }
+
+    // queste due funzioni effettuano l'update dell'utente con le preferenze aggiornate
 
     addFavorities(ID: number) {
         this.sondaAdded = true;
         this.sondaRemoved = false;
         this.markerFavorities = ID;
     }
+
     removeFavorities(ID: number) {
         this.sondaRemoved = true;
         this.sondaAdded = false;

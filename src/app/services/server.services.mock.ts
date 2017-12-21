@@ -45,7 +45,6 @@ export class MockServerService {
         // } else {
         //     responseMocked = this.measurementMocks.firstMeasurement;
         // }
-
         return new HttpResponse({
             body: this.measurementMocks.firstMeasurement,
             headers: headers,
