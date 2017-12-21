@@ -19,22 +19,33 @@ export class MockServerService {
     private pollutantMocks = new PollutantMocks();
     private measurementMocks = new MeasurementMock();
     private averageMocks = new AverageMocks();
+    private drillsArray: Drill[] = [this.drillMocks.firstDrill, this.drillMocks.secondDrill, this.drillMocks.thirdDrill];
+
 
     getDrill(): HttpResponse<any> {
         let headers = new HttpHeaders({
             ['Content-type']: 'application/json'
         });
         return new HttpResponse({
-            body: this.drillMocks.firstDrill,
+            body: this.drillsArray,
             headers: headers,
             status: 200
         });
     }
 
-    getMeasurementByDrill(): HttpResponse<any> {
+    getMeasurementByDrill(drillIdentifier): HttpResponse<any> {
         let headers = new HttpHeaders({
             ['Content-type']: 'application/json'
         });
+
+        // let responseMocked;
+
+        // if (drillIdentifier === 1) {
+        //     responseMocked = this.measurementMocks.firstMeasurement;
+        // } else {
+        //     responseMocked = this.measurementMocks.firstMeasurement;
+        // }
+
         return new HttpResponse({
             body: this.measurementMocks.firstMeasurement,
             headers: headers,

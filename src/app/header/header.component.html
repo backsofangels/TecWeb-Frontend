@@ -6,10 +6,16 @@
   <div *ngIf="markerClicked" class="centerDiv">
     <p>Quì c'è un allarme!</p>
   </div>
-  <div class="rightDiv">
+  <div class="rightDiv" *ngIf="!userLogged">
     <nav>
         <a routerLink="login">Sign In</a>
         <a routerLink="signup">Sign Up</a>
+    </nav>
+  </div>
+  <div class="rightDiv" *ngIf="userLogged">
+    <nav>
+        <a routerLink="profile">Profilo</a>
+        <a routerLink="home">Esci</a>
     </nav>
   </div>
 </div>

@@ -4,19 +4,19 @@
     <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6">
         <agm-marker
             *ngFor="let m of markers;"
-            (markerClick)="clickedMarker(m.ID)"
-            [label]="m.ID"
+            (markerClick)="clickedMarker(m.drillIdentifier)"
+            [label]="m.drillIdentifier"
             [latitude]="m.lat"
             [longitude]="m.lng">
             <agm-info-window *ngIf="loggedUser">
             <div class="form-buttons">
-                <button *ngIf="markerFavorities!=m.ID"
+                <button *ngIf="markerFavorities!=m.drillIdentifier"
                         class="button-secondary"
-                        (click)="addFavorities(m.ID)">Attiva avvisi
+                        (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
                 </button>
-                <button *ngIf="markerFavorities==m.ID"
+                <button *ngIf="markerFavorities==m.drillIdentifier"
                         class="button-secondary"
-                        (click)="removeFavorities(m.ID)">Disattiva avvisi
+                        (click)="removeFavorities(m.drillIdentifier)">Disattiva avvisi
                 </button>
             </div>
         </agm-info-window>
@@ -26,7 +26,12 @@
 <div *ngIf="markerClicked" class="rightDiv">
     <h2>Ultimi rilevamenti:</h2>
     <p>Sonda: {{markerID}}</p>
-    <p>Rilevamento {{markerName}}</p>
+    <pre class="measurementDisplay" *ngFor="let measurement of measure">
+        Data misurazione: {{measurement.measurementDate}}
+        Nome inquinante: {{measurement.pollutantMonitored.pollutantName}}
+        Quantità: {{measuement.quantityMeasured}} mg/m3
+        Quantità massima: {{measurement.pollutantMonitored.maximumThreshold}}
+    </pre>
     <div *ngIf="sondaAdded" class="rightDiv">
         <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
     </div>

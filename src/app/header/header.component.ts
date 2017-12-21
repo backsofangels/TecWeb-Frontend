@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   private markerClicked: boolean;
   private auth: AuthService = new AuthService(this.http);
+  private userLogged: boolean;
   constructor(private http: HttpClient) {
   }
 
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
     clickedMarker(ID: number) {
       if (ID > 5) {
         this.markerClicked = true;
+        this.userLogged = true;
       } else {
         this.markerClicked = false;
       }

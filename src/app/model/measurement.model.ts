@@ -1,4 +1,3 @@
-import { Drill } from './drill.model';
 import { Pollutant } from './pollutant.model';
 
 export class Measurement {

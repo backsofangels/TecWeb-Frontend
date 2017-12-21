@@ -18,5 +18,5 @@ export class MeasurementMock {
           },
           'quantityMeasured': 0.14
         }
-      ]
+      ];
 }
