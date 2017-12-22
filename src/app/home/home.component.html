@@ -5,7 +5,6 @@
         <agm-marker
             *ngFor="let m of markers;"
             (markerClick)="clickedMarker(m.drillIdentifier)"
-            [label]="m.drillIdentifier"
             [latitude]="m.lat"
             [longitude]="m.lng">
             <agm-info-window *ngIf="loggedUser">
@@ -43,10 +42,11 @@
                     </tr>
                 </thead>
                 <br>
-                <tbody *ngFor="let m of measure" id="tableBody">
+                <tbody *ngFor="let m of measure">
                     <tr *ngIf="m.pollutantMonitored.pollutantID==markerID && m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
                         id="rowAlert">
-                        <td> {{m.pollutantMonitored.pollutantID}} <img id="alertImg" src="assets/images/alert.png"></td>
+                        <td> {{m.pollutantMonitored.pollutantID}} 
+                            <img id="alertImg" src="assets/images/alert.png"></td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>

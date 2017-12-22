@@ -1,7 +1,7 @@
 <div>
   <div class="leftDiv">
       <h1 id="name" style="float: left"><a routerLink="home">PolluTech</a></h1>
-      <img style="float: right" src="assets/images/Logo.png">
+      <img (click)="userLogged=true" style="float: right" src="assets/images/Logo.png">
   </div>
   <div *ngIf="markerClicked" class="centerDiv">
     <p>Quì c'è un allarme?</p>
@@ -15,7 +15,7 @@
   <div class="rightDiv" *ngIf="userLogged">
     <nav>
         <a routerLink="profile">Profilo</a>
-        <a routerLink="home">Esci</a>
+        <a (click)="logOut()" routerLink="home">Esci</a>
     </nav>
   </div>
 </div>
