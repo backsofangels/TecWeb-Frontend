@@ -19,8 +19,7 @@ import { Measurement } from '../model/measurement.model';
 
 export class HomeComponent implements OnInit {
 
-    private loggedUser: Boolean = true;
-    // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
+    private loggedUser: Boolean = false;
     private markers: Drill[] = [];
 
     private markerID: number;
@@ -40,14 +39,12 @@ export class HomeComponent implements OnInit {
         //    this.clickedMarker(drillID);
         // } else {
         //     this.http.get("").subscribe(data => {
-        //        this.markers.push(this.mockedServer.getDrill().body as Drill);    // Non sono sicuro funzioni perchè il backend ritorna una lista al posto di
-        //     });                                                                   // un array
+        //        this.markers.push(this.mockedServer.getDrill().body as Drill);    // Non sono sicuro funzioni perchè il backend
+        //     });                                                                   // ritorna una lista al posto di un array
         // }
-        console.log(this.mockedServer.getDrill().body as Drill[]);
         this.mockedServer.getDrill().body.forEach(element => {
             this.markers.push(element as Drill);
         });
-        console.log(this.mockedServer.getMeasurementByDrill().body);
   }
 
     clickedMarker(ID: number) {
@@ -55,24 +52,18 @@ export class HomeComponent implements OnInit {
         // this.auth.getMeasurementsbyDrill(ID);
         this.mockedServer.getMeasurementByDrill(ID).body.forEach(element => {
             this.measure.push(element as Measurement);
-            console.log(element as Measurement);
         });
         this.markerClicked = true;
         this.markerID = ID;
-        console.log(this.measure);
     }
 
     // queste due funzioni effettuano l'update dell'utente con le preferenze aggiornate
 
     addFavorities(ID: number) {
-        this.sondaAdded = true;
-        this.sondaRemoved = false;
         this.markerFavorities = ID;
     }
 
     removeFavorities(ID: number) {
-        this.sondaRemoved = true;
-        this.sondaAdded = false;
         this.markerFavorities = -1;
     }
 }

@@ -8,34 +8,33 @@
             [latitude]="m.lat"
             [longitude]="m.lng">
             <agm-info-window *ngIf="loggedUser">
-            <div class="form-buttons">
-                <button *ngIf="markerFavorities!=m.drillIdentifier"
-                        class="button-secondary"
-                        (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
-                </button>
-                <button *ngIf="markerFavorities==m.drillIdentifier"
-                        class="button-secondary"
-                        (click)="removeFavorities(m.drillIdentifier)">Disattiva avvisi
-                </button>
-            </div>
-        </agm-info-window>
+                <div class="form-buttons">
+                    <button *ngIf="markerFavorities!=m.drillIdentifier"
+                            class="button-secondary"
+                            (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
+                    </button>
+                    <button *ngIf="markerFavorities==m.drillIdentifier"
+                            class="button-secondary"
+                            (click)="removeFavorities(m.drillIdentifier)">Disattiva avvisi
+                    </button>
+                </div>
+            </agm-info-window>
         </agm-marker>
     </agm-map>
 </div>
-<div *ngIf="!markerClicked" class="rightDiv">
+<div *ngIf="!markerClicked && !loggedUser" class="rightDiv">
     <h1>
         Clicca su una sonda per visualizzarne gli ultimi rilevamenti!
     </h1>
 </div>
-<div *ngIf="markerClicked" class="rightDiv">
+<div *ngIf="markerClicked || loggedUser" class="rightDiv">
     <fieldset>
         <legend id="center"><h2>Ultimi rilevamenti:</h2></legend>
-        <p>Sonda: {{markerID}}</p>
-        <div class="measurementDisplay">
+           <div class="measurementDisplay">
             <table class="tableResults">
                 <thead>
                     <tr>
-                        <td>Sonda:</td>
+                        <td>Sonda: {{markerID}}</td>
                         <td>Data misurazione: </td>
                         <td>Nome inquinante: </td>
                         <td>Quantità: </td>
@@ -43,7 +42,7 @@
                 </thead>
                 <br>
                 <tbody *ngFor="let m of measure">
-                    <tr *ngIf="m.pollutantMonitored.pollutantID==markerID && m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
+                    <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
                         id="rowAlert">
                         <td> {{m.pollutantMonitored.pollutantID}} 
                             <img id="alertImg" src="assets/images/alert.png"></td>
@@ -51,7 +50,7 @@
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
                     </tr>
-                    <tr *ngIf="m.pollutantMonitored.pollutantID==markerID && m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
+                    <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
                         <td> {{m.pollutantMonitored.pollutantID}} </td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
@@ -73,13 +72,4 @@
             <div id="center"><button class="button-primary">Cerca</button></div>
         </fieldset>
     </div>
-
-    <!-- div da eliminare -->
-    <div *ngIf="sondaAdded">
-        <p> Hai attivato l'avviso per la sonda {{markerFavorities}} </p>
-    </div>
-    <div *ngIf="sondaRemoved">
-        <p> Hai disattivato l'avviso per la sonda </p>
-    </div>
-
 </div>
