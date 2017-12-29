@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http);
-//    private mockedServer = new MockServerService();
     private measure: Measurement[] = [];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
     constructor(private http: HttpClient) {
@@ -64,4 +63,6 @@ export class HomeComponent implements OnInit {
         this.sondaAdded = false;
         this.markerFavorities = -1;
     }
+
+
 }
