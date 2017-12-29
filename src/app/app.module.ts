@@ -11,8 +11,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {APIInterceptor, AuthInterceptor} from './HTTPInterceptor';
 import {AgmCoreModule} from '@agm/core';
 import {ModelComponent} from './model/model.component';
-import {MocksComponent} from './mocks/mocks.component';
-import {ServicesComponent} from './services/services.component';
 import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
@@ -24,8 +22,6 @@ import {ProfileComponent} from './profile/profile.component';
       HomeComponent,
       ProfileComponent,
       ModelComponent,
-      MocksComponent,
-      ServicesComponent,
   ],
   imports: [
       BrowserModule,
