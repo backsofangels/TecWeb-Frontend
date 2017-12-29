@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {User} from './user';
+import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
 import {jwt} from 'jsonwebtoken';
 
@@ -12,7 +12,7 @@ export class AuthService {
 
     login(email: string, password: string) {
         return this.http.post<User>('post/auth/login', {email, password})
-            .do(res => this.setSession);
+            .do(() => this.setSession);
     }
 
     logout(): void {
@@ -23,9 +23,9 @@ export class AuthService {
 
     public isLoggedIn(): boolean {
         let loggedIn: boolean;
-        this.http.get('get/auth/me').subscribe(res => {
+        this.http.get('get/auth/me').subscribe(() => {
             loggedIn = true;
-        }, err => {
+        }, () => {
             loggedIn = false;
         });
         return loggedIn;
