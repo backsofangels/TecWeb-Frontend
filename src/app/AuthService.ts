@@ -23,7 +23,7 @@ export class AuthService {
 
     public isLoggedIn(): boolean {
         let loggedIn: boolean;
-        this.http.get('get/auth/me').subscribe(() => {
+        this.http.get('auth/me').subscribe(() => {
             loggedIn = true;
         }, () => {
             loggedIn = false;
