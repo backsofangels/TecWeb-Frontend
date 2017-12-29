@@ -7,7 +7,7 @@
             (markerClick)="clickedMarker(m.drillIdentifier)"
             [latitude]="m.lat"
             [longitude]="m.lng">
-            <agm-info-window *ngIf="loggedUser">
+            <agm-info-window>
                 <div class="form-buttons">
                     <button *ngIf="markerFavorities!=m.drillIdentifier"
                             class="button-secondary"
@@ -44,7 +44,7 @@
                 <tbody *ngFor="let m of measure">
                     <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
                         id="rowAlert">
-                        <td> {{m.pollutantMonitored.pollutantID}} 
+                        <td> {{m.pollutantMonitored.pollutantID}}
                             <img id="alertImg" src="assets/images/alert.png"></td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>

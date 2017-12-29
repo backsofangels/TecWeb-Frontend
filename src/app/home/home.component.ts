@@ -13,7 +13,6 @@ import {Pollutant} from "../model/pollutant.model";
 
 export class HomeComponent implements OnInit {
 
-    private loggedUser: Boolean = true;
     private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private markerID: number;
     private markerFavorities: number;
@@ -28,10 +27,13 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         // Prima di connettermi al backend controllo se il JSON e il JWT sono presenti nel localStorage
+        let drillID = -1;
         if (localStorage.id_token && localStorage.user && this.auth.isLoggedIn()) {
-            const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-            this.clickedMarker(drillID);
-        } else {
+            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            if (drillID != -1)
+                this.clickedMarker(drillID);
+        }
+        if (drillID == -1) {
             this.http.get("get/drill/all").subscribe(data => {
                 for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
                     this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
