@@ -12,20 +12,23 @@ export class HeaderComponent implements OnInit {
 
   private markerClicked: boolean;
   private auth: AuthService = new AuthService(this.http);
-  private userLogged: boolean;
+  private userLogged = true;
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.clickedMarker(6);
+    this.clickedMarker(2);
   }
 
-    clickedMarker(ID: number) {
-      if (ID > 5) {
-        this.markerClicked = true;
-        this.userLogged = true;
-      } else {
-        this.markerClicked = false;
-      }
+  clickedMarker(ID: number) {
+    if (ID > 5) {
+      this.markerClicked = true;
+    } else {
+      this.markerClicked = false;
     }
+  }
+
+  logOut() {
+    this.userLogged = false;
+  }
 }
