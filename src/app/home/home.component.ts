@@ -1,69 +1,67 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AgmCoreModule} from '@agm/core';
-import { measurementByDrillId } from '../measurementbydrill.mockup';
-import { MockServerService } from '../services/server.services.mock';
-import { HttpRequest } from 'selenium-webdriver/http';
-import { Drill } from '../model/drill.model';
-import { Average } from '../model/average.model';
-import { Measurement } from '../model/measurement.model';
+import {Drill} from '../model/drill.model';
+import {Measurement} from '../model/measurement.model';
+import {Pollutant} from "../model/pollutant.model";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
 })
 
 export class HomeComponent implements OnInit {
 
-    private loggedUser: Boolean = false;
-    private markers: Drill[] = [];
-
+    private loggedUser: Boolean = true;
+    private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private markerID: number;
     private markerFavorities: number;
     private sondaAdded: boolean;
     private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http);
-    private mockedServer = new MockServerService();
-    private measure: Measurement[] = [];
+//    private mockedServer = new MockServerService();
+    private measure: Measurement[] = [];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
+
     constructor(private http: HttpClient) {
     }
 
     ngOnInit() {
-        // if (this.auth.isLoggedIn()) {
-        //    const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-        //    this.clickedMarker(drillID);
-        // } else {
-        //     this.http.get("").subscribe(data => {
-        //        this.markers.push(this.mockedServer.getDrill().body as Drill);    // Non sono sicuro funzioni perchè il backend
-        //     });                                                                   // ritorna una lista al posto di un array
-        // }
-        this.mockedServer.getDrill().body.forEach(element => {
-            this.markers.push(element as Drill);
-        });
-  }
+        // Prima di connettermi al backend controllo se il JSON e il JWT sono presenti nel localStorage
+        if (localStorage.id_token && localStorage.user && this.auth.isLoggedIn()) {
+            const drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            this.clickedMarker(drillID);
+        } else {
+            this.http.get("get/drill/all").subscribe(data => {
+                for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
+                    this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
+                }
+            });
+        }
+    }
 
     clickedMarker(ID: number) {
         console.log('clicked the marker ' + ID);
-        // this.auth.getMeasurementsbyDrill(ID);
-        this.mockedServer.getMeasurementByDrill(ID).body.forEach(element => {
-            this.measure.push(element as Measurement);
+        this.http.get('get/drill/measurement/' + ID).subscribe(data => {
+            for (let i in data) {   // Inserisco in measure[] le misure prese dal database
+                this.measure.push(new Measurement(new Pollutant(data[i].pollutantMonitored.pollutantID, data[i].pollutantMonitored.pollutantName,
+                    data[i].pollutantMonitored.maximumThreshold), data[i].quantityMeasured, data[i].measurementDate));
+            }
         });
         this.markerClicked = true;
         this.markerID = ID;
     }
 
-    // queste due funzioni effettuano l'update dell'utente con le preferenze aggiornate
-
     addFavorities(ID: number) {
+        this.sondaAdded = true;
+        this.sondaRemoved = false;
         this.markerFavorities = ID;
     }
 
-    removeFavorities(ID: number) {
+    removeFavorities() {
+        this.sondaRemoved = true;
+        this.sondaAdded = false;
         this.markerFavorities = -1;
     }
 }
