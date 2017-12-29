@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
  */
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
-    backendURL = `http://188.226.186.60`;
+    backendURL = `http://188.226.186.60/pollutech/api/`;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

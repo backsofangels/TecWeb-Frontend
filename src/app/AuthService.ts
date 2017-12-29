@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import { MomentModule } from 'angular2-moment';
 import {User} from './user';
 import 'rxjs/add/operator/do';
 import {jwt} from 'jsonwebtoken';
@@ -8,13 +7,11 @@ import {jwt} from 'jsonwebtoken';
 @Injectable()
 export class AuthService {
 
-    results: string[];
-
     constructor(private http: HttpClient) {
     }
 
     login(email: string, password: string) {
-        return this.http.post<User>('/auth/login', {email, password})
+        return this.http.post<User>('post/auth/login', {email, password})
             .do(res => this.setSession);
     }
 
@@ -26,7 +23,7 @@ export class AuthService {
 
     public isLoggedIn(): boolean {
         let loggedIn: boolean;
-        this.http.get('/auth/me').subscribe(res => {
+        this.http.get('get/auth/me').subscribe(res => {
             loggedIn = true;
         }, err => {
             loggedIn = false;
@@ -42,12 +39,6 @@ export class AuthService {
          const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
          return moment(expiresAt);
      }   */
-
-    getMeasurementsbyDrill(ID: number) {
-        this.http.get('/drill/measurement/:' + ID).subscribe(data => {
-            this.results = data['results'];
-        });
-    }
 
     private setSession(authResult): void {
         //    const expiresAt = moment().add(authResult.expiresIn, 'second');
