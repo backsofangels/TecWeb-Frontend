@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
 
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clickedMarker(2);
+      this.userLogged = this.auth.isLoggedIn();
   }
 
   clickedMarker(ID: number) {
