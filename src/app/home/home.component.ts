@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         // Prima di connettermi al backend controllo se il JSON e il JWT sono presenti nel localStorage
         let drillID = -1;
-        if (localStorage.id_token && localStorage.user && this.auth.isLoggedIn()) {
+        if (this.auth.isLoggedIn()) {
             drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
             if (drillID != -1)
                 this.clickedMarker(drillID);
