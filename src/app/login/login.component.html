@@ -1,5 +1,4 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-<p *ngIf="errorLogin">Username o password non corretti</p>
 <fieldset id="innerContainer">
   <legend><h1>Benvenuto!</h1></legend>
   <div class="form-field">
@@ -17,5 +16,6 @@
   <div class="form-buttons">
     <button type="submit" class="button-primary" [disabled]="!loginForm.form.valid"> Login </button>
   </div>
+  <p *ngIf="errorLogin">Username o password non corretti</p>
 </fieldset>
 </form>

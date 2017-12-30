@@ -25,10 +25,10 @@ export class SignupComponent {
         if (form.valid) {
             console.log(form.value);
             const params = new HttpParams()
-            .set('firstName', 'inserisci valore del form')
-            .set('lastName', 'inserisci valore del form')
-            .set('email', 'inserisci valore del form')
-            .set('pwd', 'inserisci valore del form')
+            .set('firstName', 'this.firstname')
+            .set('lastName', 'this.lastname')
+            .set('email', 'this.email')
+            .set('pwd', 'this.password')
             .set('favoriteDrill', '-1');
         this.http.post('signup', params).subscribe(() => {
                 this.router.navigateByUrl('/login');
