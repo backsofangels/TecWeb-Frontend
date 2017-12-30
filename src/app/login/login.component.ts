@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../AuthService';
 import {HttpClient} from "@angular/common/http";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,16 @@ export class LoginComponent {
     private router: Router;
     private errorLogin: boolean;
 
+    email: string;
+    password: string;
+
+    onSubmit(form: NgForm) {
+        if (form.valid) {
+        console.log(form.value);
+            this.login();
+        // ...our form is valid, we can submit the data
+        }
+    }
     constructor(private fb: FormBuilder, private http: HttpClient) {
 
         this.form = this.fb.group({

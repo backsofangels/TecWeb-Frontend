@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -14,9 +15,16 @@ export class SignupComponent {
     constructor(private http: HttpClient) {
     }
 
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+
     // Bisogna inserire all'interno dei vari set i valori presi dal form
-    onSubmit() {
-        const params = new HttpParams()
+    onSubmit(form: NgForm) {
+        if (form.valid) {
+            console.log(form.value);
+            const params = new HttpParams()
             .set('firstName', 'inserisci valore del form')
             .set('lastName', 'inserisci valore del form')
             .set('email', 'inserisci valore del form')
@@ -26,6 +34,7 @@ export class SignupComponent {
                 this.router.navigateByUrl('/login');
             }
         );
+    }
   }
 
 }
