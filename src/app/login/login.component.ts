@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../AuthService';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,11 @@ import {AuthService} from '../AuthService';
 
 export class LoginComponent {
     form: FormGroup;
-    private authService: AuthService;
+    private auth: AuthService = new AuthService(this.http);
     private router: Router;
     private errorLogin: boolean;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private http: HttpClient) {
 
         this.form = this.fb.group({
             email: ['', Validators.required],
@@ -27,7 +28,7 @@ export class LoginComponent {
         const val = this.form.value;
 
         if (val.email && val.password) {
-            this.authService.login(val.email, val.password)
+            this.auth.login(val.email, val.password)
                 .subscribe(
                     () => {
                         console.log('User is logged in');

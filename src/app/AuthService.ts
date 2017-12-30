@@ -11,8 +11,9 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<User>('post/auth/login', {email, password})
-            .do(() => this.setSession);
+        return this.http.get<User>('auth/login', {
+            headers: {'Authorization': "Basic + [" + btoa(email + ":" + password) + "]"}
+        }).do(() => this.setSession);
     }
 
     logout(): void {
@@ -22,12 +23,14 @@ export class AuthService {
     }
 
     public isLoggedIn(): boolean {
-        let loggedIn: boolean;
-        this.http.get('auth/me').subscribe(() => {
-            loggedIn = true;
-        }, () => {
-            loggedIn = false;
-        });
+        let loggedIn: boolean = false;
+        if (localStorage.id_token) {     // Prima di fare richiesta al server verifico che ci sia il jwt
+            this.http.get('auth/me').subscribe(() => {
+                loggedIn = true;
+            }, () => {
+                loggedIn = false;
+            })
+        }
         return loggedIn;
     }
 
