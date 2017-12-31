@@ -61,13 +61,28 @@
     </fieldset>
 
     <div>
+        <form #dateForm="ngForm" (ngSubmit)="onSubmit(dateForm)">
         <fieldset>
             <legend id="center"><h2>Cerca per data:</h2></legend>
             <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
-            <input type="datetime-local" name="fromDate" max="1979-12-31" class="calendar"><br></div>
+                <input [matDatepicker]="myDatepickerfrom">
+                <mat-datepicker-toggle [for]="myDatepickerfrom"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepickerfrom></mat-datepicker>
+                <br>
+            </div>
             <div class="rightDiv"><p>Enter a date after 2000-01-01:</p>
-            <input type="datetime-local" name="toDate" min="2000-01-02" class="calendar"><br><br></div>
-            <div id="center"><button class="button-primary">Cerca</button></div>
+                <input required [(ngModel)]="dateto" name="dateto" 
+                #dateto="ngModel" [matDatepicker]="myDatepickerto">
+                <mat-datepicker-toggle [for]="myDatepickerto"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepickerto></mat-datepicker>
+                <br><br><br>
+            </div>
+            <div id="center">
+                <button type="submit" class="button-primary" [disabled]="!dateForm.form.valid">Search</button>
+            </div>
         </fieldset>
+        </form>
     </div>
+    
+
 </div>

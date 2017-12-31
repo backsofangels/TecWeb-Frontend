@@ -13,6 +13,10 @@ import {APIInterceptor, AuthInterceptor} from './HTTPInterceptor';
 import {AgmCoreModule} from '@agm/core';
 import {ModelComponent} from './model/model.component';
 import {ProfileComponent} from './profile/profile.component';
+import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +29,10 @@ import {ProfileComponent} from './profile/profile.component';
       ModelComponent,
   ],
   imports: [
+      NoopAnimationsModule,
+      BrowserAnimationsModule,
+      MatNativeDateModule,
+      MatDatepickerModule,
       FormsModule,
       BrowserModule,
       HttpClientModule,

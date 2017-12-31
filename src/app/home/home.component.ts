@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Drill} from '../model/drill.model';
 import {Measurement} from '../model/measurement.model';
 import {Pollutant} from "../model/pollutant.model";
+import { NgForm } from '@angular/forms';
+import { NativeDateAdapter } from '@angular/material';
 
 @Component({
     selector: 'app-home',
@@ -13,6 +15,7 @@ import {Pollutant} from "../model/pollutant.model";
 
 export class HomeComponent implements OnInit {
 
+    dateto: NativeDateAdapter;
     private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private markerID: number;
     private markerFavorities: number;
@@ -66,5 +69,10 @@ export class HomeComponent implements OnInit {
         this.markerFavorities = -1;
     }
 
-
+    onSubmit(form: NgForm) {
+        if (form.valid) {
+        console.log(form.value);
+        // ...our form is valid, we can submit the data
+        }
+    }
 }
