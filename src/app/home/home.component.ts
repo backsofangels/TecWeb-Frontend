@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http);
-    private measure: Measurement[] = [];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
+    private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
     constructor(private http: HttpClient) {
     }
@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
     }
 
     clickedMarker(ID: number) {
+        this.measure = [];
         console.log('clicked the marker ' + ID);
         this.http.get('get/drill/measurement/' + ID).subscribe(data => {
             for (let i in data) {   // Inserisco in measure[] le misure prese dal database
