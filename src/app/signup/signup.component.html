@@ -1,17 +1,37 @@
-<fieldset id="innerContainer">
-  <legend><h1>Crea il tuo account!</h1></legend>
-  <p>
-      <input name="username" formControlName="username" class="input" placeholder="Username">
+<form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+  <fieldset id="innerContainer">
+    <legend><h1>Crea il tuo account!</h1></legend>
+    <p>
+        <input type="text" placeholder="First name" required
+          [(ngModel)]="firstname" name="firstname" class="input"  
+          #firstName="ngModel">
+        <input type="text" placeholder="Last name" required
+          [(ngModel)]="lastname" name="lastname" class="input"  
+          #lastName="ngModel">
     </p>
-  <p>
-    <input name="email" formControlName="email" class="input" placeholder="Nuova Email">
-    <input name="email" formControlName="email" class="input" placeholder="Ripeti nuova Email">
-  </p>
-  <p>
-    <input name="password" formControlName="password"
-            type="password" class="input" placeholder="Nuova Password">
-    <input name="password" formControlName="password"
-            type="password" class="input" placeholder="Ripeti nuova Password">
-  </p>
-  <button class="button-primary"> Sign Up </button>
-</fieldset>
+    <p>
+        <input type="text" placeholder="New email" required
+          [(ngModel)]="email" name="email" class="input"  
+          #pickedEmail="ngModel">
+        <input type="text" placeholder="Repeat new email" required
+          [(ngModel)]="email2" name="email" class="input" 
+          #pickedEmail2="ngModel">
+        <span *ngIf="email != email2">
+          Error
+        </span>
+    </p>
+    <p>
+        <input type="password" placeholder="New password" required 
+          [(ngModel)]="password" name="password" class="input"
+          #pickedPassword="ngModel">
+        <input type="password" placeholder="Repeat new password" required 
+          [(ngModel)]="password2" name="password" class="input" 
+          #pickedpassword2="ngModel">
+        <span *ngIf="password != password2">
+          Error
+        </span>
+    </p>
+    <button type="submit" class="button-primary" [disabled]="!signupForm.form.valid"> Sign Up </button>
+  </fieldset>
+</form>
+
