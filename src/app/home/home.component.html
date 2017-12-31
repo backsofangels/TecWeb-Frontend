@@ -34,7 +34,6 @@
             <table class="tableResults">
                 <thead>
                     <tr>
-                        <td>Sonda: {{markerID}}</td>
                         <td>Data misurazione: </td>
                         <td>Nome inquinante: </td>
                         <td>Quantità: </td>
@@ -44,10 +43,9 @@
                 <tbody *ngFor="let m of measure">
                     <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
                         id="rowAlert">
-                        <td> {{m.pollutantMonitored.pollutantID}}
-                            <img id="alertImg" src="assets/images/alert.png"></td>
                         <td> {{m.measurementDate}} </td>
-                        <td> {{m.pollutantMonitored.pollutantName}} </td>
+                        <td> {{m.pollutantMonitored.pollutantName}}
+                            <img id="alertImg" src="assets/images/alert.png"> </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
                     </tr>
                     <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
