@@ -64,21 +64,26 @@
         <form #dateForm="ngForm" (ngSubmit)="onSubmit(dateForm)">
         <fieldset>
             <legend id="center"><h2>Cerca per data:</h2></legend>
-            <!-- <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
-                <input [matDatepicker]="myDatepickerfrom">
-                <mat-datepicker-toggle [for]="myDatepickerfrom"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepickerfrom></mat-datepicker>
-                <br>
+            <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
+                <mat-form-field>
+                        <input matInput [matDatepicker]="myDatepickerfrom"
+                        [(ngModel)]="datefrom" name="datefrom" >
+                        <mat-datepicker-toggle matSuffix [for]="myDatepickerfrom"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepickerfrom></mat-datepicker>
+                      </mat-form-field>
+                      <br>
             </div>
             <div class="rightDiv"><p>Enter a date after 2000-01-01:</p>
-                <input required [(ngModel)]="dateto" name="dateto" 
-                #dateto="ngModel" [matDatepicker]="myDatepickerto">
-                <mat-datepicker-toggle [for]="myDatepickerto"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepickerto></mat-datepicker>
+                <mat-form-field>
+                        <input matInput [matDatepicker]="myDatepickerto"
+                        [(ngModel)]="dateto" name="dateto" >
+                        <mat-datepicker-toggle matSuffix [for]="myDatepickerto"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepickerto></mat-datepicker>
+                      </mat-form-field>
                 <br><br><br>
-            </div> -->
+            </div>
             <div id="center">
-                <button type="submit" class="button-primary" [disabled]="!dateForm.form.valid">Search</button>
+                <button type="submit" class="button-primary" [disabled]="false">Search</button>
             </div>
         </fieldset>
         </form>
