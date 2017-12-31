@@ -48,7 +48,6 @@
                         <td> {{m.quantityMeasured}} mg/m3 </td>
                     </tr>
                     <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">
-                        <td> {{m.pollutantMonitored.pollutantID}} </td>
                         <td> {{m.measurementDate}} </td>
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
