@@ -14,9 +14,9 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
     form: FormGroup;
     private auth: AuthService = new AuthService(this.http);
-    private router: Router;
     private errorLogin: boolean;
-
+  
+    constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     email: string;
     password: string;
 
@@ -27,7 +27,6 @@ export class LoginComponent {
         // ...our form is valid, we can submit the data
         }
     }
-    constructor(private fb: FormBuilder, private http: HttpClient) {
 
         this.form = this.fb.group({
             email: ['', Validators.required],
@@ -45,8 +44,9 @@ export class LoginComponent {
                         console.log('User is logged in');
                         this.router.navigateByUrl('/');
                     },
-                    () => {
+                    (error) => {
                         console.log('User log failed');
+                        console.log(error);
                         this.errorLogin = true;
                     }
                 );

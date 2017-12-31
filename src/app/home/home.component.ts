@@ -30,10 +30,11 @@ export class HomeComponent implements OnInit {
         let drillID = -1;
         if (this.auth.isLoggedIn()) {
             drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-            if (drillID != -1)
+            if (drillID !== -1) {
                 this.clickedMarker(drillID);
+            }
         }
-        if (drillID == -1) {
+        if (drillID === -1) {
             this.http.get("get/drill/all").subscribe(data => {
                 for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
                     this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
