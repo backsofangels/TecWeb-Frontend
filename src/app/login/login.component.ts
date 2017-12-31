@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthService} from '../AuthService';
-import {HttpClient} from "@angular/common/http";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../AuthService';
+import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -13,21 +13,20 @@ import { NgForm } from '@angular/forms';
 
 export class LoginComponent {
     form: FormGroup;
+    email: String;
+    password: String;
     private auth: AuthService = new AuthService(this.http);
     private errorLogin: boolean;
-  
-    constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
-    email: string;
-    password: string;
 
     onSubmit(form: NgForm) {
         if (form.valid) {
-        console.log(form.value);
+            console.log(form.value);
             this.login();
-        // ...our form is valid, we can submit the data
+            // ...our form is valid, we can submit the data
         }
     }
 
+    constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
         this.form = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
