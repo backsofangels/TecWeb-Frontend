@@ -3,7 +3,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/com
 import {Observable} from "rxjs/Observable";
 
 /**
- * Questa classe ha il compito di intercttare tutte le richieste HTTP e aggiungerci il JWT nell'header se l'utente è
+ * Questa classe ha il compito di intercettare tutte le richieste HTTP e aggiungerci il JWT nell'header se l'utente è
  * loggato, in caso contrario non fa nulla
  */
 @Injectable()
