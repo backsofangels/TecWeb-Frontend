@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../AuthService';
-import { HttpClient } from '@angular/common/http';
-import { routes } from '../app-routing.module';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../AuthService';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +13,9 @@ import { routes } from '../app-routing.module';
 export class LoginComponent {
     form: FormGroup;
     private auth: AuthService = new AuthService(this.http);
-    private router: Router;
     private errorLogin: boolean;
 
-    constructor(private fb: FormBuilder, private http: HttpClient) {
+    constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
 
         this.form = this.fb.group({
             email: ['', Validators.required],
@@ -33,10 +31,11 @@ export class LoginComponent {
                 .subscribe(
                     () => {
                         console.log('User is logged in');
-                        this.router.navigateByUrl('app-home');
+                        this.router.navigateByUrl('/');
                     },
-                    () => {
+                    (error) => {
                         console.log('User log failed');
+                        console.log(error);
                         this.errorLogin = true;
                     }
                 );
