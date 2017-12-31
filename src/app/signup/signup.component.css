@@ -1,0 +1,8 @@
+agm-map {
+  position: relative;
+  top: 0;
+  height: 100%;
+}
+#map {
+  height: 100%;
+}

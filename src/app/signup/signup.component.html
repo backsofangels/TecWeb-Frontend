@@ -3,35 +3,57 @@
     <legend><h1>Crea il tuo account!</h1></legend>
     <p>
         <input type="text" placeholder="First name" required
-          [(ngModel)]="firstname" name="firstname" class="input"  
-          #firstName="ngModel">
+               [(ngModel)]="firstName" name="firstName" class="input"
+        >
         <input type="text" placeholder="Last name" required
-          [(ngModel)]="lastname" name="lastname" class="input"  
-          #lastName="ngModel">
+               [(ngModel)]="lastName" name="lastName" class="input"
+        >
     </p>
     <p>
         <input type="text" placeholder="New email" required
-          [(ngModel)]="email" name="email" class="input"  
-          #pickedEmail="ngModel">
+               [(ngModel)]="email" name="email" class="input"
+        >
         <input type="text" placeholder="Repeat new email" required
-          [(ngModel)]="email2" name="email" class="input" 
-          #pickedEmail2="ngModel">
+               [(ngModel)]="email2" name="email" class="input"
+        >
         <span *ngIf="email != email2">
           Error
         </span>
     </p>
     <p>
-        <input type="password" placeholder="New password" required 
-          [(ngModel)]="password" name="password" class="input"
-          #pickedPassword="ngModel">
-        <input type="password" placeholder="Repeat new password" required 
-          [(ngModel)]="password2" name="password" class="input" 
-          #pickedpassword2="ngModel">
-        <span *ngIf="password != password2">
+        <input type="password" placeholder="New password" required
+               [(ngModel)]="pwd" name="pwd" class="input"
+        >
+        <input type="password" placeholder="Repeat new password" required
+               [(ngModel)]="password2" name="pwd" class="input"
+        >
+        <span *ngIf="pwd != password2">
           Error
         </span>
     </p>
-    <button type="submit" class="button-primary" [disabled]="!signupForm.form.valid"> Sign Up </button>
+      <p>Seleziona da quale sonda vuoi ricevere gli avvisi dalla mappa!</p>
+      <div style="width: 100%; height: 500px" id="map">
+          <agm-map [latitude]="41.87194" [longitude]="12.56738" [zoom]="6">
+              <agm-marker
+                      *ngFor="let m of markers;"
+                      [latitude]="m.lat"
+                      [longitude]="m.lng">
+                  <agm-info-window>
+                      <div class="form-buttons">
+                          <button *ngIf="drillID!=m.drillIdentifier"
+                                  class="button-secondary"
+                                  (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
+                          </button>
+                          <p *ngIf="drillID==m.drillIdentifier"
+                          >Avvisi attivati
+                          </p>
+                      </div>
+                  </agm-info-window>
+              </agm-marker>
+          </agm-map>
+      </div>
+
+      <button type="submit" class="button-primary" [disabled]="!signupForm.form.valid"> Sign Up</button>
   </fieldset>
 </form>
 

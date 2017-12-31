@@ -1,37 +1,48 @@
-import {Component} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import { NgForm } from '@angular/forms';
+import {NgForm} from '@angular/forms';
+import {Drill} from "../model/drill.model";
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
 
-    private router: Router;
+    private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
+    private drillID: number = 0;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
     }
 
-    firstname: string;
-    lastname: string;
-    email: string;
-    password: string;
+    ngOnInit() {
+        this.http.get("get/drill/all").subscribe(data => {
+            for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
+                this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
+            }
+        });
+    }
+
+    addFavorities(ID: number) {
+        console.log('clicked the marker ' + ID);
+        this.drillID = ID;
+    }
 
     // Bisogna inserire all'interno dei vari set i valori presi dal form
     onSubmit(form: NgForm) {
-        if (form.valid) {
-            console.log(form.value);
-            const params = new HttpParams()
-            .set('firstName', 'this.firstname')
-            .set('lastName', 'this.lastname')
-            .set('email', 'this.email')
-            .set('pwd', 'this.password')
-            .set('favoriteDrill', '-1');
-        this.http.post('signup', params).subscribe(() => {
+        if (form.valid && this.drillID) {
+            const body = JSON.stringify({
+                firstName: form.value.firstName, lastName: form.value.lastName, email: form.value.email,
+                pwd: form.value.pwd, favoriteDrill: this.drillID
+            });
+            this.http.post('auth/signup', body).subscribe(() => {
+                console.log("Signup Successful");
                 this.router.navigateByUrl('/login');
+            }, error => {
+                console.log("Error signup");
+                console.log(error);
             }
         );
     }
