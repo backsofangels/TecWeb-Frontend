@@ -26,20 +26,15 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        // Prima di connettermi al backend controllo se il JSON e il JWT sono presenti nel localStorage
-        let drillID = -1;
-        if (this.auth.isLoggedIn()) {
-            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-            if (drillID !== -1) {
-                this.clickedMarker(drillID);
+        this.http.get("get/drill/all").subscribe(data => {
+            for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
+                this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
             }
-        }
-        if (drillID === -1) {
-            this.http.get("get/drill/all").subscribe(data => {
-                for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
-                    this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
-                }
-            });
+        });
+        if (this.auth.isLoggedIn()) {
+            let drillID;
+            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            this.clickedMarker(drillID);
         }
     }
 
@@ -56,16 +51,11 @@ export class HomeComponent implements OnInit {
     }
 
     addFavorities(ID: number) {
+        /*     let decoded = JSON.parse(localStorage.getItem('user'));
+             let user = new User(decoded.identifier,decoded.firstName,decoded.lastName,decoded.email, ID);   */
+        //Aggiornare il database con la nuova sonda
         this.sondaAdded = true;
         this.sondaRemoved = false;
         this.markerFavorities = ID;
     }
-
-    removeFavorities() {
-        this.sondaRemoved = true;
-        this.sondaAdded = false;
-        this.markerFavorities = -1;
-    }
-
-
 }
