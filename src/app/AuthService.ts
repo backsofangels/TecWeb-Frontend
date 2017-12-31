@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
 import {jwt} from 'jsonwebtoken';
+import { HttpResponse } from 'selenium-webdriver/http';
+import { decode } from 'punycode';
 
 @Injectable()
 export class AuthService {
@@ -11,8 +13,9 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.get<User>('auth/login', {
-            headers: {'Authorization': "Basic + [" + btoa(email + ":" + password) + "]"}
+        return this.http.get('auth/login', {
+            responseType: 'text',
+            headers: {'Authorization': 'Basic ' + btoa(email + ':' + password)}
         }).do(() => this.setSession);
     }
 
@@ -29,7 +32,7 @@ export class AuthService {
                 loggedIn = true;
             }, () => {
                 loggedIn = false;
-            })
+            });
         }
         return loggedIn;
     }
@@ -46,6 +49,7 @@ export class AuthService {
     private setSession(authResult): void {
         //    const expiresAt = moment().add(authResult.expiresIn, 'second');
         const decoded = jwt.decode(authResult.idToken);
+        console.log(decode.toString());
         localStorage.setItem('user',
             JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
         localStorage.setItem('id_token', authResult.idToken);

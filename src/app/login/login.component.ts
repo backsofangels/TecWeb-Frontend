@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthService} from '../AuthService';
-import {HttpClient} from "@angular/common/http";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../AuthService';
+import { HttpClient } from '@angular/common/http';
+import { routes } from '../app-routing.module';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent {
                 .subscribe(
                     () => {
                         console.log('User is logged in');
-                        this.router.navigateByUrl('/');
+                        this.router.navigateByUrl('app-home');
                     },
                     () => {
                         console.log('User log failed');
