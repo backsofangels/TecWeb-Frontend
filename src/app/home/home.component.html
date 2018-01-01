@@ -13,8 +13,7 @@
                             class="button-secondary"
                             (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
                     </button>
-                    <p *ngIf="markerFavorities==m.drillIdentifier"
-                    >Avvisi attivati
+                    <p *ngIf="markerFavorities==m.drillIdentifier">Avvisi attivati
                     </p>
                 </div>
             </agm-info-window>
@@ -52,7 +51,6 @@
                         <td> {{m.pollutantMonitored.pollutantName}} </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
                     </tr>
-                    <!-- <p>Quantità massima: {{m.pollutantMonitored.maximumThreshold}}</p> -->
                 </tbody>
             </table>
         </div>
@@ -62,7 +60,7 @@
         <form #dateForm="ngForm" (ngSubmit)="onSubmit(dateForm)">
         <fieldset>
             <legend id="center"><h2>Cerca per data:</h2></legend>
-            <div class="leftDiv"><p>Enter a date before 1980-01-01:</p>
+            <div class="leftDiv"><p>Dal giorno:</p>
                 <mat-form-field>
                         <input matInput [matDatepicker]="myDatepickerfrom"
                         [(ngModel)]="datefrom" [min]="mindate" [max]="currentDate" name="datefrom" >
@@ -71,7 +69,7 @@
                       </mat-form-field>
                       <br>
             </div>
-            <div class="rightDiv"><p>Enter a date after 2000-01-01:</p>
+            <div class="rightDiv"><p>Al giorno:</p>
                 <mat-form-field>
                         <input matInput [min]="datefrom" [max]="currentDate" [matDatepicker]="myDatepickerto"
                         [(ngModel)]="dateto" name="dateto" >
@@ -81,7 +79,7 @@
                 <br><br><br>
             </div>
             <div id="center">
-                <button type="submit" class="button-primary" [disabled]="false">Search</button>
+                <button type="submit" class="button-primary" [disabled]="!dateForm.form.valid">Search</button>
             </div>
         </fieldset>
         </form>
