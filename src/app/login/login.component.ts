@@ -12,7 +12,8 @@ import {NgForm} from '@angular/forms';
 
 export class LoginComponent {
     private auth: AuthService = new AuthService(this.http);
-    private errorLogin: boolean;
+
+//    private errorLogin: boolean;
 
     constructor(private http: HttpClient, private router: Router) {
     }
@@ -35,7 +36,7 @@ export class LoginComponent {
                 (error) => {
                     console.log('User log failed');
                     console.log(error);
-                    this.errorLogin = true;
+//                    this.errorLogin = true;
                 }
             );
     }

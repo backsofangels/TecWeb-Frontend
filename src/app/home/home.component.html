@@ -13,10 +13,9 @@
                             class="button-secondary"
                             (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
                     </button>
-                    <button *ngIf="markerFavorities==m.drillIdentifier"
-                            class="button-secondary"
-                            (click)="removeFavorities()">Disattiva avvisi
-                    </button>
+                    <p *ngIf="markerFavorities==m.drillIdentifier"
+                    >Avvisi attivati
+                    </p>
                 </div>
             </agm-info-window>
         </agm-marker>

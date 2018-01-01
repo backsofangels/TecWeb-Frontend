@@ -4,8 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Drill} from '../model/drill.model';
 import {Measurement} from '../model/measurement.model';
 import {Pollutant} from "../model/pollutant.model";
-import { NgForm } from '@angular/forms';
-import { NativeDateAdapter, DateAdapter, MatFormField, MatFormFieldControl } from '@angular/material';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-home',
@@ -23,30 +22,26 @@ export class HomeComponent implements OnInit {
     private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http);
-    private measure: Measurement[] = [];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
+    private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
     constructor(private http: HttpClient) {
     }
 
     ngOnInit() {
-        // Prima di connettermi al backend controllo se il JSON e il JWT sono presenti nel localStorage
-        let drillID = -1;
-        if (this.auth.isLoggedIn()) {
-            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
-            if (drillID !== -1) {
-                this.clickedMarker(drillID);
+        this.http.get("get/drill/all").subscribe(data => {
+            for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
+                this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
             }
-        }
-        if (drillID === -1) {
-            this.http.get("get/drill/all").subscribe(data => {
-                for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
-                    this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
-                }
-            });
+        });
+        if (this.auth.isLoggedIn()) {
+            let drillID;
+            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            this.clickedMarker(drillID);
         }
     }
 
     clickedMarker(ID: number) {
+        this.measure = [];
         console.log('clicked the marker ' + ID);
         this.http.get('get/drill/measurement/' + ID).subscribe(data => {
             for (let i in data) {   // Inserisco in measure[] le misure prese dal database
@@ -59,15 +54,12 @@ export class HomeComponent implements OnInit {
     }
 
     addFavorities(ID: number) {
+        /*     let decoded = JSON.parse(localStorage.getItem('user'));
+             let user = new User(decoded.identifier,decoded.firstName,decoded.lastName,decoded.email, ID);   */
+        //Aggiornare il database con la nuova sonda
         this.sondaAdded = true;
         this.sondaRemoved = false;
         this.markerFavorities = ID;
-    }
-
-    removeFavorities() {
-        this.sondaRemoved = true;
-        this.sondaAdded = false;
-        this.markerFavorities = -1;
     }
 
     onSubmit(form: NgForm) {
