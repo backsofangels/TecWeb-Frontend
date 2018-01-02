@@ -13,6 +13,8 @@ export class SignupComponent implements OnInit {
 
     private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private drillID: number = 0;
+    private errorSignup: boolean = false;
+    private signupOk: boolean = false;
 
     constructor(private http: HttpClient, private router: Router) {
     }
@@ -39,9 +41,14 @@ export class SignupComponent implements OnInit {
             });
             console.log(body);
             this.http.post('auth/signup', body, {responseType: 'text'}).subscribe(() => {
+                this.signupOk = true;
                 console.log("Signup Successful");
-                this.router.navigateByUrl('/login');
+                setTimeout(() => {
+                    this.router.navigateByUrl('/login')
+                }, 3000)
+
             }, error => {
+                this.errorSignup = true;
                 console.log("Error signup");
                 console.log(error);
             }

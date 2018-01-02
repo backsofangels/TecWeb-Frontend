@@ -1,6 +1,10 @@
 <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
   <fieldset id="innerContainer">
-    <legend><h1>Crea il tuo account!</h1></legend>
+      <legend><h1>Crea il tuo account!</h1>
+          <h2 *ngIf="errorSignup">Errore: Utente già presente</h2>
+          <h2 *ngIf="signupOk">Utente creato con successo!</h2>
+          <h3 *ngIf="signupOk">Verrai ridirezionato alla pagina di login</h3>
+      </legend>
     <table align="center">
         <tr><img src="./assets/images/userimage.png">
             <td><input type="text" placeholder="First name" required
