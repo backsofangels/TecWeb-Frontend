@@ -38,9 +38,7 @@ export class HomeComponent implements OnInit {
         if (this.auth.isLoggedIn() === true) {
             console.log(this.auth.isLoggedIn());
             console.log("Utente dentro");
-            let drillID;
-            console.log(localStorage.getItem('user'));
-            this.clickedMarker(drillID);
+            this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
         } else {
             console.log(this.auth.isLoggedIn());
             console.log('Utente fuori');
@@ -84,12 +82,10 @@ export class HomeComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         if (form.valid) {
-        console.log(form.value);
             this.auth.average(this.markerID, form.value.datefrom, form.value.dateto)
                 .subscribe(
                     (data: Average) => {
                         console.log('Average successful');
-                        console.log(data);
                         this.measure = [];
                         for (let i in data.measurements) {   // Inserisco in measure[] le misure prese dal database
                             this.measure.push(new Measurement(new Pollutant(data.measurements[i].f1.pollutantID, data.measurements[i].f1.pollutantName,
