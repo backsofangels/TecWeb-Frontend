@@ -35,11 +35,15 @@ export class HomeComponent implements OnInit {
                 this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
             }
         });
-        if (this.auth.isLoggedIn()) {
+        if (this.auth.isLoggedIn() === true) {
+            console.log(this.auth.isLoggedIn());
             console.log("Utente dentro");
             let drillID;
-            drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
+            console.log(localStorage.getItem('user'));
             this.clickedMarker(drillID);
+        } else {
+            console.log(this.auth.isLoggedIn());
+            console.log('Utente fuori');
         }
     }
 
