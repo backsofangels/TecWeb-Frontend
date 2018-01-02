@@ -19,11 +19,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.userLogged = this.auth.isLoggedIn();
+      this.auth.getLoggedInStatus.subscribe((status) => this.userLogged = status);
   }
 
   logOut() {
-    this.userLogged = false;
+      this.userLogged = false;
       this.auth.logout();
       this.router.navigateByUrl('/');
   }

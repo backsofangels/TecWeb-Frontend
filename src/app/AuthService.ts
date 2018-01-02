@@ -1,5 +1,5 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
 import "rxjs/add/operator/map";
@@ -12,6 +12,8 @@ export class AuthService {
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
+    @Output() getLoggedInStatus: EventEmitter<any> = new EventEmitter();
+
     login(email: string, password: string) {
         return this.http.get('auth/login', {
             responseType: 'text',
@@ -19,6 +21,7 @@ export class AuthService {
         }).do(() => {
             const value: string = this.cookieService.get('jwt');
             this.setSession(value);
+            this.getLoggedInStatus.emit(true);
         });
     }
 
@@ -41,7 +44,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('user');
         localStorage.removeItem('id_token');
-        //    localStorage.removeItem("expires_at");
+        this.getLoggedInStatus.emit(false);
     }
 
     public isLoggedIn(): boolean {
