@@ -14,15 +14,12 @@ import {CookieService} from "ngx-cookie-service";
 export class LoginComponent {
     private auth: AuthService = new AuthService(this.http, this.cookieService);
 
-//    private errorLogin: boolean;
-
     constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
     }
 
     onSubmit(form: NgForm) {
         if (form.valid) {
-            console.log(form.value);
-            localStorage.clear();
+            this.auth.clearLocalStorage();
             this.login(form);
         }
     }
@@ -32,12 +29,11 @@ export class LoginComponent {
             .subscribe(
                 () => {
                     console.log('User is logged in');
-                    this.router.navigateByUrl('/');
+                    window.location.href = "http://188.226.186.60";
                 },
                 (error) => {
                     console.log('User log failed');
                     console.log(error);
-//                    this.errorLogin = true;
                 }
             );
     }
