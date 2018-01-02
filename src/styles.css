@@ -15,6 +15,12 @@ a:link {
     text-decoration: none;
 }
 
+agm-map {
+    position: relative;
+    top: 0px;
+    height: 100%;
+}
+
 #container{
     position: absolute;
     clear: both;

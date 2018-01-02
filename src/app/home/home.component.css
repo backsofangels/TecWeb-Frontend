@@ -16,12 +16,6 @@
     vertical-align: top;
 }
 
-agm-map {
-    position: relative;
-    top: 0px;
-    height: 100%;
-}
-
 .measurementDisplay{
     height: 200px;
     overflow: scroll;
