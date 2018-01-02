@@ -1,8 +1,12 @@
-agm-map {
-  position: relative;
-  top: 0;
-  height: 100%;
-}
 #map {
   height: 100%;
+  width: 100%; 
+  height: 250px;
+}
+img{
+  position: relative;
+  top: 5px;
+  right: 5px;
+  vertical-align: bottom;
+  width: 20px;
 }

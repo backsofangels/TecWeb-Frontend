@@ -14,8 +14,7 @@ import {NgForm} from '@angular/forms';
 
 export class HomeComponent implements OnInit {
 
-    datefrom;
-    dateto;
+    currentDate = new Date();
     private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private markerID: number;
     private markerFavorities: number;
