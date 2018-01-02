@@ -6,6 +6,7 @@ import {Measurement} from '../model/measurement.model';
 import {Pollutant} from "../model/pollutant.model";
 import {NgForm} from '@angular/forms';
 import {CookieService} from "ngx-cookie-service";
+import {Average} from "../model/average.model";
 
 @Component({
     selector: 'app-home',
@@ -67,7 +68,22 @@ export class HomeComponent implements OnInit {
     onSubmit(form: NgForm) {
         if (form.valid) {
         console.log(form.value);
-        // ...our form is valid, we can submit the data
+            this.auth.average(this.markerID, form.value.datefrom, form.value.dateto)
+                .subscribe(
+                    (data: Average) => {
+                        console.log('Average successful');
+                        console.log(data);
+                        this.measure = [];
+                        for (let i in data.measurements) {   // Inserisco in measure[] le misure prese dal database
+                            this.measure.push(new Measurement(new Pollutant(data.measurements[i].f1.pollutantID, data.measurements[i].f1.pollutantName,
+                                data.measurements[i].f1.maximumThreshold), data.measurements[i].f2, data.maximumBoundary));
+                        }
+                    },
+                    (error) => {
+                        console.log('Average failed');
+                        console.log(error);
+                    }
+                );
         }
     }
 }

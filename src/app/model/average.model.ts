@@ -1,9 +1,9 @@
-import { Drill } from './drill.model';
-import { Pollutant } from './pollutant.model';
+import {Drill} from './drill.model';
+import {Pollutant} from './pollutant.model';
 
 export class Average {
-    drillMonitoring: Drill;
-    averageForPollutant: Map<Pollutant, number>;
-    beginDate: Date;
-    endDate: Date;
+    drillInformations: Drill;
+    measurements: Map<Pollutant, number>;
+    minorBoundary: Date;
+    maximumBoundary: Date;
 }
