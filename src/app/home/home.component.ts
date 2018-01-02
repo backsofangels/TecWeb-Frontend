@@ -57,12 +57,25 @@ export class HomeComponent implements OnInit {
     }
 
     addFavorities(ID: number) {
-        /*     let decoded = JSON.parse(localStorage.getItem('user'));
-             let user = new User(decoded.identifier,decoded.firstName,decoded.lastName,decoded.email, ID);   */
-        //Aggiornare il database con la nuova sonda
         this.sondaAdded = true;
         this.sondaRemoved = false;
         this.markerFavorities = ID;
+        //  Aggiorno il database con la nuova sonda
+        let firstName = JSON.parse(localStorage.getItem('user')).firstName;
+        let lastName = JSON.parse(localStorage.getItem('user')).lastName;
+        let email = JSON.parse(localStorage.getItem('user')).email;
+        let password = JSON.parse(localStorage.getItem('user')).password;
+        this.auth.update(ID, firstName, lastName, email, password)
+            .subscribe(
+                () => {
+                    console.log('Update successful');
+                },
+                (error) => {
+                    console.log('Update failed');
+                    console.log(error);
+//                    this.errorLogin = true;
+                }
+            );
     }
 
     onSubmit(form: NgForm) {
