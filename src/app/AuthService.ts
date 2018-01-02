@@ -38,7 +38,10 @@ export class AuthService {
             firstName: firstName, lastName: lastName, email: email,
             pwd: password, favoriteDrill: drillID
         });
-        return this.http.put('update', body).do(() => this.setSession);
+        return this.http.put('auth/update', body).do(() => {
+            const value: string = this.cookieService.get('jwt');
+            this.setSession(value);
+        });
     }
 
     clearLocalStorage(): void {
