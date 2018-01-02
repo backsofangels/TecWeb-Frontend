@@ -1,6 +1,10 @@
 <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
   <fieldset id="innerContainer">
-    <legend><h1>{{firstame}} {{lastname}}</h1></legend>
+    <legend>
+      <h1>{{firstame}} {{lastname}}</h1>
+      <h2 *ngIf="errorUpdate">Errore: Utente già presente</h2>
+      <h2 *ngIf="!errorUpdate">Utente aggiornato con successo!</h2>
+    </legend>
     <table>
       <tr>
         <td>Change Email</td>
