@@ -22,6 +22,7 @@ export class LoginComponent {
     onSubmit(form: NgForm) {
         if (form.valid) {
             console.log(form.value);
+            localStorage.clear();
             this.login(form);
             // ...our form is valid, we can submit the data
         }
@@ -32,12 +33,6 @@ export class LoginComponent {
             .subscribe(
                 () => {
                     console.log('User is logged in');
-                    //    const value: string = this.cookieService.get('jwt');
-                    let i = this.cookieService.getAll();
-                    for (let a in i) {
-                        console.log(i[a]);
-                    }
-                    //     this.auth.setSession(value);
                     this.router.navigateByUrl('/');
                 },
                 (error) => {

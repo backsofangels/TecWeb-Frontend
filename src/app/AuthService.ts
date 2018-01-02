@@ -18,8 +18,6 @@ export class AuthService {
             headers: {'Authorization': 'Basic ' + btoa(email + ':' + password)}
         }).do(() => {
             const value: string = this.cookieService.get('jwt');
-            console.log(value.toString());
-            console.log(value);
             this.setSession(value);
         });
     }
@@ -35,8 +33,7 @@ export class AuthService {
     }
 
     public isLoggedIn(): boolean {
-        const token = localStorage.getItem('id_token');
-        return tokenNotExpired(token);
+        return tokenNotExpired('id_token');
     }
 
     isLoggedOut(): boolean {
@@ -53,7 +50,6 @@ export class AuthService {
         let jwtHelper: JwtHelper = new JwtHelper();
         console.log(jwt);
         const decoded = jwtHelper.decodeToken(jwt);
-        console.log(decoded);
         console.log(decoded.toString());
         localStorage.setItem('user',
             JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
