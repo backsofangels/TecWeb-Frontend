@@ -13,12 +13,13 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
     private auth: AuthService = new AuthService(this.http, this.cookieService);
-  private userLogged = true;
+    private userLogged = true;
 
     constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
   }
 
   ngOnInit() {
+      // Questa sottoscrizione ci serve per sapere i cambiamenti sullo stato dell'utente (loggato oppure no)
       this.auth.getLoggedInStatus.subscribe((status) => this.userLogged = status);
   }
 
