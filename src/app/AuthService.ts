@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
@@ -24,7 +24,19 @@ export class AuthService {
         });
     }
 
-    update(body: string) {
+    average(drillID: number, beginDate: Date, endDate: Date) {
+        let params = new HttpParams()
+            .set("identifier", drillID.toString())
+            .set("beginDate", beginDate.toLocaleDateString())
+            .set("endDate", endDate.toLocaleDateString());
+        return this.http.get('get/drill/average', {params})
+    }
+
+    update(drillID: number, firstName: string, lastName: string, email: string, password: string) {
+        const body = JSON.stringify({
+            firstName: firstName, lastName: lastName, email: email,
+            pwd: password, favoriteDrill: drillID
+        });
         return this.http.put('update', body).do(() => this.setSession);
     }
 
