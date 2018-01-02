@@ -25,12 +25,7 @@ export class ProfileComponent {
         let drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
         let firstName = JSON.parse(localStorage.getItem('user')).firstName;
         let lastName = JSON.parse(localStorage.getItem('user')).lastName;
-        console.log(form.value);
-        const body = JSON.stringify({
-            firstName: firstName, lastName: lastName, email: form.value.email,
-            pwd: form.value.pwd, favoriteDrill: drillID
-        });
-        this.auth.update(body)
+        this.auth.update(drillID, firstName, lastName, form.value.email, form.value.pwd)
             .subscribe(
                 () => {
                     console.log('Update successful');
