@@ -37,7 +37,8 @@ export class SignupComponent implements OnInit {
                 firstName: form.value.firstName, lastName: form.value.lastName, email: form.value.email,
                 pwd: form.value.pwd, favoriteDrill: this.drillID
             });
-            this.http.post('auth/signup', body).subscribe(() => {
+            console.log(body);
+            this.http.post('auth/signup', body, {responseType: 'text'}).subscribe(() => {
                 console.log("Signup Successful");
                 this.router.navigateByUrl('/login');
             }, error => {

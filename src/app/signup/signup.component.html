@@ -4,51 +4,58 @@
     <table align="center">
         <tr><img src="./assets/images/userimage.png">
             <td><input type="text" placeholder="First name" required
-                    [(ngModel)]="firstName" name="firstName" class="input"></td>
+                       [(ngModel)]="firstName" name="firstName" class="input"
+            ></td>
             <td><input type="text" placeholder="Last name" required
-                    [(ngModel)]="lastName" name="lastName" class="input"></td>
+                       [(ngModel)]="lastName" name="lastName" class="input"
+            ></td>
         </tr>
         <tr><img src="./assets/images/email.png">
             <td><input type="text" placeholder="New email" required
-                    [(ngModel)]="email" name="email" class="input"></td>
+                       [(ngModel)]="email" name="email" class="input"
+            ></td>
             <td><input type="text" placeholder="Repeat new email" required
-                    [(ngModel)]="email2" name="email" class="input"></td>
+                       [(ngModel)]="email2" name="email" class="input"
+            ></td>
             <td *ngIf="email != email2">
                 Error
             </td>
         </tr>
         <tr><img src="./assets/images/passwordimage.png">
             <td><input type="password" placeholder="New password" required
-                [(ngModel)]="pwd" name="pwd" class="input"></td>
+                       [(ngModel)]="pwd" name="pwd" class="input"
+            ></td>
             <td><input type="password" placeholder="Repeat new password" required
-                [(ngModel)]="password2" name="pwd" class="input"></td>
+                       [(ngModel)]="password2" name="pwd" class="input"
+            ></td>
             <td *ngIf="pwd != password2">
                 Error
             </td>
         </tr>
     </table>
-    <p>Seleziona da quale sonda vuoi ricevere gli avvisi dalla mappa!</p>
-    <div id="map">
-        <agm-map [latitude]="45.12345" [longitude]="12.56738" [zoom]="6">
-            <agm-marker *ngFor="let m of markers;"
-                [latitude]="m.lat"
-                [longitude]="m.lng">
-                <agm-info-window>
-                    <div class="form-buttons">
-                        <button *ngIf="drillID!=m.drillIdentifier"
-                            class="button-secondary"
-                            (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
-                        </button>
-                        <p *ngIf="drillID==m.drillIdentifier"> 
-                            Avvisi attivati
-                        </p>
-                    </div>
-                </agm-info-window>
-            </agm-marker>
-        </agm-map>
-    </div>
-    <br>
-    <button type="submit" class="button-primary" [disabled]="!signupForm.form.valid"> Sign Up</button>
+      <p>Seleziona da quale sonda vuoi ricevere gli avvisi dalla mappa!</p>
+      <div id="map">
+          <agm-map [latitude]="45.12345" [longitude]="12.56738" [zoom]="6">
+              <agm-marker
+                      *ngFor="let m of markers;"
+                      [latitude]="m.lat"
+                      [longitude]="m.lng">
+                  <agm-info-window>
+                      <div class="form-buttons">
+                          <button *ngIf="drillID!=m.drillIdentifier"
+                                  class="button-secondary"
+                                  (click)="addFavorities(m.drillIdentifier)">Attiva avvisi
+                          </button>
+                          <p *ngIf="drillID==m.drillIdentifier"
+                          >Avvisi attivati
+                          </p>
+                      </div>
+                  </agm-info-window>
+              </agm-marker>
+          </agm-map>
+      </div>
+      <br>
+      <button type="submit" class="button-primary" [disabled]="!signupForm.form.valid"> Sign Up</button>
   </fieldset>
 </form>
 
