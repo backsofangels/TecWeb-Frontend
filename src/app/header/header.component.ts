@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
 import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,26 +12,19 @@ import {CookieService} from "ngx-cookie-service";
 })
 export class HeaderComponent implements OnInit {
 
-  private markerClicked: boolean;
     private auth: AuthService = new AuthService(this.http, this.cookieService);
   private userLogged = true;
 
-    constructor(private http: HttpClient, private cookieService: CookieService) {
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
   }
 
   ngOnInit() {
       this.userLogged = this.auth.isLoggedIn();
   }
 
-  clickedMarker(ID: number) {
-    if (ID > 5) {
-      this.markerClicked = true;
-    } else {
-      this.markerClicked = false;
-    }
-  }
-
   logOut() {
     this.userLogged = false;
+      this.auth.logout();
+      this.router.navigateByUrl('/');
   }
 }

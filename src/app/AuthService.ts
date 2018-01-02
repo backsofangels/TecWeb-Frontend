@@ -51,14 +51,15 @@ export class AuthService {
         return tokenNotExpired(token);
     }
 
-    isLoggedOut(): boolean {
-        return !this.isLoggedIn();
-    }
+    /*
+        isLoggedOut(): boolean {
+            return !this.isLoggedIn();
+        }
 
-    /* getExpiration() {
-         const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-         return moment(expiresAt);
-     }   */
+         getExpiration() {
+             const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+             return moment(expiresAt);
+         }   */
 
     public setSession(jwt: string): void {
         console.log("set Session");
