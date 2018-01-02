@@ -3,7 +3,7 @@
     <legend>
       <h1>{{firstame}} {{lastname}}</h1>
       <h2 *ngIf="errorUpdate">Errore: Utente già presente</h2>
-      <h2 *ngIf="!errorUpdate">Utente aggiornato con successo!</h2>
+        <h2 *ngIf="updateOk">Utente aggiornato con successo!</h2>
     </legend>
     <table>
       <tr>
