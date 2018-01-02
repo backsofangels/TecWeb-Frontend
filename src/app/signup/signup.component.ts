@@ -39,7 +39,6 @@ export class SignupComponent implements OnInit {
                 firstName: form.value.firstName, lastName: form.value.lastName, email: form.value.email,
                 pwd: form.value.pwd, favoriteDrill: this.drillID
             });
-            console.log(body);
             this.http.post('auth/signup', body, {responseType: 'text'}).subscribe(() => {
                 this.signupOk = true;
                 console.log("Signup Successful");

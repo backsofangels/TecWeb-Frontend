@@ -24,7 +24,6 @@ export class LoginComponent {
             console.log(form.value);
             localStorage.clear();
             this.login(form);
-            // ...our form is valid, we can submit the data
         }
     }
 
