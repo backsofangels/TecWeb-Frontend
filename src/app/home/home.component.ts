@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
             }
         });
         if (this.auth.isLoggedIn()) {
+            console.log("Utente dentro");
             let drillID;
             drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
             this.clickedMarker(drillID);

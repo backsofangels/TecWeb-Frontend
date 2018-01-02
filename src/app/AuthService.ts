@@ -3,8 +3,8 @@ import {Injectable} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
 import {jwt} from 'jsonwebtoken';
-import { HttpResponse } from 'selenium-webdriver/http';
-import { decode } from 'punycode';
+import "rxjs/add/operator/map";
+import {tokenNotExpired} from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,13 @@ export class AuthService {
         return this.http.get('auth/login', {
             responseType: 'text',
             headers: {'Authorization': 'Basic ' + btoa(email + ':' + password)}
-        }).do(() => this.setSession);
+        }).do((res) => {
+            this.setSession(res);
+        });
+    }
+
+    update(body: string) {
+        return this.http.put('update', body).do(() => this.setSession);
     }
 
     logout(): void {
@@ -26,15 +32,9 @@ export class AuthService {
     }
 
     public isLoggedIn(): boolean {
-        let loggedIn: boolean = false;
-        if (localStorage.id_token) {     // Prima di fare richiesta al server verifico che ci sia il jwt
-            this.http.get('auth/me').subscribe(() => {
-                loggedIn = true;
-            }, () => {
-                loggedIn = false;
-            });
-        }
-        return loggedIn;
+        const token = localStorage.getItem('id_token');
+        console.log(token);
+        return tokenNotExpired(token);
     }
 
     isLoggedOut(): boolean {
@@ -46,10 +46,10 @@ export class AuthService {
          return moment(expiresAt);
      }   */
 
-    private setSession(authResult): void {
-        //    const expiresAt = moment().add(authResult.expiresIn, 'second');
+    public setSession(authResult): void {
+        console.log("set Session");
         const decoded = jwt.decode(authResult.idToken);
-        console.log(decode.toString());
+        console.log(decoded.toString());
         localStorage.setItem('user',
             JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
         localStorage.setItem('id_token', authResult.idToken);
