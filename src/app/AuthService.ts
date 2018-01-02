@@ -2,22 +2,25 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
-import {jwt} from 'jsonwebtoken';
 import "rxjs/add/operator/map";
-import {tokenNotExpired} from "angular2-jwt";
+import {JwtHelper, tokenNotExpired} from "angular2-jwt";
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
     login(email: string, password: string) {
         return this.http.get('auth/login', {
             responseType: 'text',
             headers: {'Authorization': 'Basic ' + btoa(email + ':' + password)}
-        }).do((res) => {
-            this.setSession(res);
+        }).do(() => {
+            const value: string = this.cookieService.get('jwt');
+            console.log(value.toString());
+            console.log(value);
+            this.setSession(value);
         });
     }
 
@@ -33,7 +36,6 @@ export class AuthService {
 
     public isLoggedIn(): boolean {
         const token = localStorage.getItem('id_token');
-        console.log(token);
         return tokenNotExpired(token);
     }
 
@@ -46,13 +48,16 @@ export class AuthService {
          return moment(expiresAt);
      }   */
 
-    public setSession(authResult): void {
+    public setSession(jwt: string): void {
         console.log("set Session");
-        const decoded = jwt.decode(authResult.idToken);
+        let jwtHelper: JwtHelper = new JwtHelper();
+        console.log(jwt);
+        const decoded = jwtHelper.decodeToken(jwt);
+        console.log(decoded);
         console.log(decoded.toString());
         localStorage.setItem('user',
             JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
-        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('id_token', jwt);
         //   localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
     }
 }

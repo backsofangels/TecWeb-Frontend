@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
+import {CookieService} from "ngx-cookie-service";
 
 
 @Component({
@@ -11,9 +12,10 @@ import {HttpClient} from '@angular/common/http';
 export class HeaderComponent implements OnInit {
 
   private markerClicked: boolean;
-  private auth: AuthService = new AuthService(this.http);
+    private auth: AuthService = new AuthService(this.http, this.cookieService);
   private userLogged = true;
-  constructor(private http: HttpClient) {
+
+    constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from "../AuthService";
 import {HttpClient} from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +10,11 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-    private auth: AuthService = new AuthService(this.http);
+    private auth: AuthService = new AuthService(this.http, this.cookieService);
     private updateOk: boolean = false;
     private errorUpdate: boolean = false;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
   email: string;

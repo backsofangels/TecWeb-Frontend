@@ -5,6 +5,7 @@ import {Drill} from '../model/drill.model';
 import {Measurement} from '../model/measurement.model';
 import {Pollutant} from "../model/pollutant.model";
 import {NgForm} from '@angular/forms';
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
     selector: 'app-home',
@@ -21,10 +22,10 @@ export class HomeComponent implements OnInit {
     private sondaAdded: boolean;
     private sondaRemoved: boolean;
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
-    private auth: AuthService = new AuthService(this.http);
+    private auth: AuthService = new AuthService(this.http, this.cookieService);
     private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
     ngOnInit() {

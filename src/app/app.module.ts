@@ -12,9 +12,9 @@ import {APIInterceptor, AuthInterceptor} from './HTTPInterceptor';
 import {AgmCoreModule} from '@agm/core';
 import {ModelComponent} from './model/model.component';
 import {ProfileComponent} from './profile/profile.component';
-import {MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {CookieService} from "ngx-cookie-service";
 
 
 @NgModule({
@@ -43,6 +43,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
       })
   ],
     providers: [
+        CookieService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: APIInterceptor,
