@@ -42,8 +42,9 @@
                     <tr *ngIf="m.quantityMeasured>m.pollutantMonitored.maximumThreshold" 
                         id="rowAlert">
                         <td> {{m.measurementDate}} </td>
-                        <td> {{m.pollutantMonitored.pollutantName}}
-                            <img id="alertImg" src="assets/images/alert.png"> </td>
+                        <td > {{m.pollutantMonitored.pollutantName}}
+                            <img  matTooltip="Misurazione fuori valore massimo!" matTooltipPosition="above"
+                                id="alertImg" src="assets/images/alert.png"> </td>
                         <td> {{m.quantityMeasured}} mg/m3 </td>
                     </tr>
                     <tr *ngIf="m.quantityMeasured<=m.pollutantMonitored.maximumThreshold">

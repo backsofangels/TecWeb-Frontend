@@ -9,6 +9,7 @@ import {CookieService} from "ngx-cookie-service";
 import {Average} from "../model/average.model";
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
+
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
     private auth: AuthService = new AuthService(this.http, this.cookieService);
     private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
+    mindate = new Date(2017, 11, 31);
     mindatefrom: Date;
     datefrom: Date;
     addEvent(event: MatDatepickerInputEvent<Date>) {
