@@ -36,12 +36,7 @@ export class HomeComponent implements OnInit {
             }
         });
         if (this.auth.isLoggedIn() === true) {
-            console.log(this.auth.isLoggedIn());
-            console.log("Utente dentro");
             this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
-        } else {
-            console.log(this.auth.isLoggedIn());
-            console.log('Utente fuori');
         }
     }
 
@@ -62,6 +57,7 @@ export class HomeComponent implements OnInit {
         this.sondaAdded = true;
         this.sondaRemoved = false;
         this.markerFavorities = ID;
+
         //  Aggiorno il database con la nuova sonda
         let firstName = JSON.parse(localStorage.getItem('user')).firstName;
         let lastName = JSON.parse(localStorage.getItem('user')).lastName;

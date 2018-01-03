@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
 
   ngOnInit() {
+      // Questa sottoscrizione ci serve per sapere i cambiamenti sullo stato dell'utente (loggato oppure no)
       this.auth.getLoggedInStatus.subscribe((status) => this.userLogged = status);
   }
 

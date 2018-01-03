@@ -12,6 +12,7 @@ export class AuthService {
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
+    // Utilizziamo questo evento per notificare l'header dello stato dell'utente (loggato oppure no)
     @Output() getLoggedInStatus: EventEmitter<any> = new EventEmitter();
 
     login(email: string, password: string) {
@@ -21,7 +22,6 @@ export class AuthService {
         }).do(() => {
             const value: string = this.cookieService.get('jwt');
             this.setSession(value);
-            this.getLoggedInStatus.emit(true);
         });
     }
 
@@ -38,12 +38,19 @@ export class AuthService {
             firstName: firstName, lastName: lastName, email: email,
             pwd: password, favoriteDrill: drillID
         });
-        return this.http.put('update', body).do(() => this.setSession);
+        return this.http.put('auth/update', body).do(() => {
+            const value: string = this.cookieService.get('jwt');
+            this.setSession(value);
+        });
+    }
+
+    clearLocalStorage(): void {
+        localStorage.removeItem('user');
+        localStorage.removeItem('id_token');
     }
 
     logout(): void {
-        localStorage.removeItem('user');
-        localStorage.removeItem('id_token');
+        this.clearLocalStorage();
         this.getLoggedInStatus.emit(false);
     }
 
@@ -62,14 +69,10 @@ export class AuthService {
          }   */
 
     public setSession(jwt: string): void {
-        console.log("set Session");
         let jwtHelper: JwtHelper = new JwtHelper();
-        console.log(jwt);
         const decoded = jwtHelper.decodeToken(jwt);
-        console.log(decoded.toString());
         localStorage.setItem('user',
-            JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.favoriteDrill, decoded.email)));
+            JSON.stringify(new User(decoded.identifier, decoded.firstName, decoded.lastName, decoded.email, decoded.favoriteDrill)));
         localStorage.setItem('id_token', jwt);
-        //   localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
     }
 }
