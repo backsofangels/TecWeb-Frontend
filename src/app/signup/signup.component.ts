@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NgForm} from '@angular/forms';
 import {Drill} from "../model/drill.model";
+import {AuthService} from "../AuthService";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-signup',
@@ -15,12 +17,14 @@ export class SignupComponent implements OnInit {
     private drillID: number = 0;
     private errorSignup: boolean = false;
     private signupOk: boolean = false;
+    private auth: AuthService = new AuthService(this.http, this.cookieService);
 
-    constructor(private http: HttpClient, private router: Router) {
+
+    constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
     }
 
     ngOnInit() {
-        this.http.get("get/drill/all").subscribe(data => {
+        this.auth.getDrills().subscribe(data => {
             for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
                 this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
             }
@@ -35,11 +39,7 @@ export class SignupComponent implements OnInit {
     // Bisogna inserire all'interno dei vari set i valori presi dal form
     onSubmit(form: NgForm) {
         if (form.valid && this.drillID) {
-            const body = JSON.stringify({
-                firstName: form.value.firstName, lastName: form.value.lastName, email: form.value.email,
-                pwd: form.value.pwd, favoriteDrill: this.drillID
-            });
-            this.http.post('auth/signup', body, {responseType: 'text'}).subscribe(() => {
+            this.auth.signup(form.value.firstName, form.value.lastName, form.value.email, form.value.pwd, this.drillID).subscribe(() => {
                 this.signupOk = true;
                 console.log("Signup Successful");
                 setTimeout(() => {

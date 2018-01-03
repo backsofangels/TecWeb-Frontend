@@ -18,7 +18,6 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 export class HomeComponent implements OnInit {
 
-    currentDate = new Date();
     private markers: Drill[] = [];      // In Questo array si devono inserire tutte le coordinate dei drill da mostrare
     private markerID: number;
     private markerFavorities: number;
@@ -27,10 +26,13 @@ export class HomeComponent implements OnInit {
     private markerClicked: boolean;     // Lo uso per far vedere la div a destra quando si clicca su un Drill
     private auth: AuthService = new AuthService(this.http, this.cookieService);
     private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
-
+    // Valori utilizzati per settare il Datepicker
+    currentDate = new Date();
+    private userLogged: boolean;
     mindate = new Date(2017, 11, 31);
     mindatefrom: Date;
     datefrom: Date;
+
     addEvent(event: MatDatepickerInputEvent<Date>) {
         this.mindatefrom = new Date(event.value.getFullYear(),
             event.value.getMonth(), event.value.getDate() + 1);
@@ -40,20 +42,22 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.http.get("get/drill/all").subscribe(data => {
+        this.auth.getDrills().subscribe(data => {
             for (let i in data) {   // Inserisco in markers[] le sonde prese dal database
                 this.markers.push(new Drill(data[i].drillID, data[i].xCoordinate, data[i].yCoordinate));
             }
         });
         if (this.auth.isLoggedIn() === true) {
+            this.userLogged = true;
             this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
-        }
+        } else
+            this.userLogged = false;
     }
 
     clickedMarker(ID: number) {
         this.measure = [];
         console.log('clicked the marker ' + ID);
-        this.http.get('get/drill/measurement/' + ID).subscribe(data => {
+        this.auth.getMeasurements(ID).subscribe(data => {
             for (let i in data) {   // Inserisco in measure[] le misure prese dal database
                 this.measure.push(new Measurement(new Pollutant(data[i].pollutantMonitored.pollutantID, data[i].pollutantMonitored.pollutantName,
                     data[i].pollutantMonitored.maximumThreshold), data[i].quantityMeasured, data[i].measurementDate));

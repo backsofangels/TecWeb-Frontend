@@ -25,12 +25,31 @@ export class AuthService {
         });
     }
 
+    signup(firstName: string, lastName: string, email: string, password: string, drillID: number) {
+        const body = JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            pwd: password,
+            favoriteDrill: drillID
+        });
+        return this.http.post('auth/signup', body, {responseType: 'text'});
+    }
+
+    getDrills() {
+        return this.http.get("get/drill/all");
+    }
+
+    getMeasurements(ID: number) {
+        return this.http.get('get/drill/measurement/' + ID);
+    }
+
     average(drillID: number, beginDate: Date, endDate: Date) {
         let params = new HttpParams()
             .set("identifier", drillID.toString())
             .set("beginDate", beginDate.toLocaleDateString())
             .set("endDate", endDate.toLocaleDateString());
-        return this.http.get('get/drill/average', {params})
+        return this.http.get('get/drill/average', {params});
     }
 
     update(drillID: number, firstName: string, lastName: string, email: string, password: string) {
