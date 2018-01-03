@@ -34,11 +34,16 @@ export class AuthService {
     }
 
     update(drillID: number, firstName: string, lastName: string, email: string, password: string) {
+        console.log('Password is ' + password);
         const body = JSON.stringify({
             firstName: firstName, lastName: lastName, email: email,
             pwd: password, favoriteDrill: drillID
         });
-        return this.http.put('auth/update', body).do(() => {
+        console.log('Body is ' + body.toString());
+        return this.http.put('auth/update', body, {
+            responseType: 'text',
+            headers: {'Content-Type': 'application/json'}
+        }).do(() => {
             const value: string = this.cookieService.get('jwt');
             this.setSession(value);
         });
