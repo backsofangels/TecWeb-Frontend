@@ -13,10 +13,9 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
     private auth: AuthService = new AuthService(this.http, this.cookieService);
-  private userLogged = true;
+    private userLogged = true;
 
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
-  }
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
 
   ngOnInit() {
       this.auth.getLoggedInStatus.subscribe((status) => this.userLogged = status);
