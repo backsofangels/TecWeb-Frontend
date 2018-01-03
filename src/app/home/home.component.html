@@ -62,17 +62,17 @@
             <legend id="center"><h2>Cerca per data:</h2></legend>
             <div class="leftDiv"><p>Dal giorno:</p>
                 <mat-form-field>
-                        <input matInput [matDatepicker]="myDatepickerfrom"
+                        <input (dateInput)="addEvent($event)" matInput [matDatepicker]="myDatepickerfrom"
                         [(ngModel)]="datefrom" [min]="mindate" [max]="currentDate" name="datefrom" >
                         <mat-datepicker-toggle matSuffix [for]="myDatepickerfrom"></mat-datepicker-toggle>
-                        <mat-datepicker #myDatepickerfrom></mat-datepicker>
+                        <mat-datepicker  #myDatepickerfrom></mat-datepicker>
                       </mat-form-field>
                       <br>
             </div>
             <div class="rightDiv"><p>Al giorno:</p>
                 <mat-form-field>
-                        <input matInput [min]="datefrom" [max]="currentDate" [matDatepicker]="myDatepickerto"
-                        [(ngModel)]="dateto" name="dateto" >
+                        <input matInput [matDatepicker]="myDatepickerto"
+                        [(ngModel)]="dateto" [min]="mindatefrom" [max]="currentDate" name="dateto" >
                         <mat-datepicker-toggle matSuffix [for]="myDatepickerto"></mat-datepicker-toggle>
                         <mat-datepicker #myDatepickerto></mat-datepicker>
                       </mat-form-field>

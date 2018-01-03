@@ -7,6 +7,7 @@ import {Pollutant} from "../model/pollutant.model";
 import {NgForm} from '@angular/forms';
 import {CookieService} from "ngx-cookie-service";
 import {Average} from "../model/average.model";
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
     selector: 'app-home',
@@ -26,6 +27,13 @@ export class HomeComponent implements OnInit {
     private auth: AuthService = new AuthService(this.http, this.cookieService);
     private measure: Measurement[];    // In Questo array si devono inserire tutte le misure dei drill da mostrare
 
+    mindatefrom: Date;
+    datefrom: Date;
+    addEvent(event: MatDatepickerInputEvent<Date>) {
+        this.mindatefrom = new Date(event.value.getFullYear(),
+            event.value.getMonth(), event.value.getDate() + 1);
+    }
+    
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
