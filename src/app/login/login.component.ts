@@ -19,7 +19,7 @@ export class LoginComponent {
 
     onSubmit(form: NgForm) {
         if (form.valid) {
-            this.auth.clearLocalStorage();
+            localStorage.clear();
             this.login(form);
         }
     }
