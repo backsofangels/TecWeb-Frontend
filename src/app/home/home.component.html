@@ -7,7 +7,7 @@
             (markerClick)="clickedMarker(m.drillIdentifier)"
             [latitude]="m.lat"
             [longitude]="m.lng">
-            <agm-info-window>
+            <agm-info-window *ngIf="userLogged">
                 <div class="form-buttons">
                     <button *ngIf="markerFavorities!=m.drillIdentifier"
                             class="button-secondary"
