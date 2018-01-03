@@ -2,7 +2,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
-import "rxjs/add/operator/map";
 import {JwtHelper, tokenNotExpired} from "angular2-jwt";
 import {CookieService} from 'ngx-cookie-service';
 
@@ -53,12 +52,10 @@ export class AuthService {
     }
 
     update(drillID: number, firstName: string, lastName: string, email: string, password: string) {
-        console.log('Password is ' + password);
         const body = JSON.stringify({
             firstName: firstName, lastName: lastName, email: email,
             pwd: password, favoriteDrill: drillID
         });
-        console.log('Body is ' + body.toString());
         return this.http.put('auth/update', body, {
             responseType: 'text',
             headers: {'Content-Type': 'application/json'}
@@ -101,10 +98,6 @@ export class AuthService {
     }
 
     /*
-        isLoggedOut(): boolean {
-            return !this.isLoggedIn();
-        }
-
          getExpiration() {
              const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
              return moment(expiresAt);

@@ -52,8 +52,6 @@ export class HomeComponent implements OnInit {
         if (this.auth.isLoggedIn() === true) {
             this.userLogged = true;
             this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
-        } else {
-            console.log(tokenNotExpired('id_token'));
         }
     }
 
