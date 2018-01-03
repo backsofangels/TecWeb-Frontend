@@ -29,7 +29,7 @@ export class LoginComponent {
             .subscribe(
                 () => {
                     console.log('User is logged in');
-                    window.location.href = "http://188.226.186.60";
+                    window.location.href = 'http://188.226.186.60';
                 },
                 (error) => {
                     console.log('User log failed');

@@ -7,6 +7,7 @@ import {Pollutant} from "../model/pollutant.model";
 import {NgForm} from '@angular/forms';
 import {CookieService} from "ngx-cookie-service";
 import {Average} from "../model/average.model";
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Component({
     selector: 'app-home',
@@ -37,6 +38,8 @@ export class HomeComponent implements OnInit {
         });
         if (this.auth.isLoggedIn() === true) {
             this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
+        } else {
+            console.log(tokenNotExpired('id_token'));
         }
     }
 
