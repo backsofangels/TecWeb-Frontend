@@ -1,7 +1,7 @@
 <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
   <fieldset id="innerContainer">
     <legend>
-      <h1>{{firstame}} {{lastname}}</h1>
+      <h1>{{firstname}} {{lastname}}</h1>
       <h2 *ngIf="errorUpdate">Errore: Utente già presente</h2>
         <h2 *ngIf="updateOk">Utente aggiornato con successo!</h2>
     </legend>
@@ -11,18 +11,8 @@
           La tua email: 
         </td>
         <td colspan="2" style="padding: 10px;">
-          {{emailuser}}
+          {{userEmail}}
         </td>
-      </tr>
-      <tr>
-        <td>Cambia Email</td>
-        <td><input type="text" placeholder="New email" required
-            [(ngModel)]="email" name="email" class="input"  
-            #pickedEmail="ngModel"></td>
-        <td><input type="text" placeholder="Repeat new email" required
-            [(ngModel)]="email2" name="email" class="input" 
-            #pickedEmail2="ngModel"></td>
-        <td *ngIf="email != email2"> Le email non coincidono </td>
       </tr>
       <tr>
         <td>Cambia password</td>
@@ -36,6 +26,6 @@
       </tr>
     </table>
     <br>
-    <button type="submit" class="button-primary" [disabled]="!profileForm.form.valid"> Submit </button>
+    <button type="submit" class="button-primary" [disabled]="!profileForm.form.valid"> Invia! </button>
   </fieldset>
 </form>

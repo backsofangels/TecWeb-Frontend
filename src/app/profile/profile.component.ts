@@ -14,21 +14,21 @@ export class ProfileComponent {
     private updateOk: boolean = false;
     private errorUpdate: boolean = false;
 
-    constructor(private http: HttpClient, private cookieService: CookieService) {
-  }
+    constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   email: string;
   password: string;
 
-  //le variabili da riempire per visualizzare il contenuto nell'html
-  firstname: string;
-  lastname: string;
-  emailuser: string;
+  // le variabili da riempire per visualizzare il contenuto nell'html
+  private userInfos = JSON.parse(localStorage.getItem('user'));
+  firstname: string = this.userInfos.firstName;
+  lastname: string = this.userInfos.lastName;
+  userEmail: string = this.userInfos.email;
 
   onSubmit(form: NgForm) {
     if (form.valid) {
         let parsed = JSON.parse(localStorage.getItem('user'));
-        this.auth.update(parsed.favoriteDrill, parsed.firstName, parsed.lastName, form.value.email, form.value.password)
+        this.auth.update(parsed.favoriteDrill, parsed.firstName, parsed.lastName, parsed.email, form.value.password)
             .subscribe(
                 () => {
                     console.log('Update successful');
