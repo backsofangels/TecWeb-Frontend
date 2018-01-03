@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
-import {CookieService} from "ngx-cookie-service";
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent {
 
     onSubmit(form: NgForm) {
         if (form.valid) {
-            this.auth.clearLocalStorage();
+            localStorage.clear();
             this.login(form);
         }
     }
@@ -29,7 +29,7 @@ export class LoginComponent {
             .subscribe(
                 () => {
                     console.log('User is logged in');
-                    window.location.href = "http://188.226.186.60";
+                    window.location.href = 'http://188.226.186.60';
                 },
                 (error) => {
                     console.log('User log failed');

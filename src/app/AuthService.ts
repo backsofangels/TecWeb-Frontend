@@ -2,7 +2,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
-import "rxjs/add/operator/map";
 import {JwtHelper, tokenNotExpired} from "angular2-jwt";
 import {CookieService} from 'ngx-cookie-service';
 
@@ -13,7 +12,7 @@ export class AuthService {
     }
 
     // Utilizziamo questo evento per notificare l'header dello stato dell'utente (loggato oppure no)
-    @Output() getLoggedInStatus: EventEmitter<any> = new EventEmitter();
+    @Output() getLoggedInStatus: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
     login(email: string, password: string) {
         return this.http.get('auth/login', {
@@ -46,9 +45,9 @@ export class AuthService {
 
     average(drillID: number, beginDate: Date, endDate: Date) {
         let params = new HttpParams()
-            .set("identifier", drillID.toString())
-            .set("beginDate", beginDate.toLocaleDateString())
-            .set("endDate", endDate.toLocaleDateString());
+            .set('identifier', drillID.toString())
+            .set('beginDate', beginDate.toLocaleDateString())
+            .set('endDate', endDate.toLocaleDateString());
         return this.http.get('get/drill/average', {params});
     }
 
@@ -57,7 +56,22 @@ export class AuthService {
             firstName: firstName, lastName: lastName, email: email,
             pwd: password, favoriteDrill: drillID
         });
-        return this.http.put('auth/update', body).do(() => {
+        return this.http.put('auth/update', body, {
+            responseType: 'text',
+            headers: {'Content-Type': 'application/json'}
+        }).do(() => {
+            const value: string = this.cookieService.get('jwt');
+            this.setSession(value);
+        });
+    }
+
+    updateFavorite(drillID: number, firstName: string, lastName: string, email: string) {
+        const body = JSON.stringify({firstName: firstName, lastName: lastName, email: email, favoriteDrill: drillID});
+        console.log('body is ' + body);
+        return this.http.put('auth/update', body, {
+            responseType: 'text',
+            headers: {'Content-Type': 'application/json'}
+        }).do(() => {
             const value: string = this.cookieService.get('jwt');
             this.setSession(value);
         });
@@ -69,19 +83,21 @@ export class AuthService {
     }
 
     logout(): void {
-        this.clearLocalStorage();
-        this.getLoggedInStatus.emit(false);
+        console.log('In logout()');
+        localStorage.clear();
     }
 
     public isLoggedIn(): boolean {
-        return tokenNotExpired('id_token');
+        if (tokenNotExpired('id_token')) {
+            this.getLoggedInStatus.emit(true);
+            return true;
+        } else {
+            this.getLoggedInStatus.emit(false);
+            return false;
+        }
     }
 
     /*
-        isLoggedOut(): boolean {
-            return !this.isLoggedIn();
-        }
-
          getExpiration() {
              const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
              return moment(expiresAt);
