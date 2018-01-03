@@ -8,6 +8,7 @@ import {NgForm} from '@angular/forms';
 import {CookieService} from "ngx-cookie-service";
 import {Average} from "../model/average.model";
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { tokenNotExpired } from 'angular2-jwt';
 
 
 @Component({
@@ -50,8 +51,9 @@ export class HomeComponent implements OnInit {
         if (this.auth.isLoggedIn() === true) {
             this.userLogged = true;
             this.clickedMarker(JSON.parse(localStorage.getItem('user')).favoriteDrill);
-        } else
-            this.userLogged = false;
+        } else {
+            console.log(tokenNotExpired('id_token'));
+        }
     }
 
     clickedMarker(ID: number) {

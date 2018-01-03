@@ -25,7 +25,8 @@ export class ProfileComponent {
         let drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;
         let firstName = JSON.parse(localStorage.getItem('user')).firstName;
         let lastName = JSON.parse(localStorage.getItem('user')).lastName;
-        this.auth.update(drillID, firstName, lastName, form.value.email, form.value.pwd)
+        console.log('Password form value is ' + form.value.password);
+        this.auth.update(drillID, firstName, lastName, form.value.email, form.value.password)
             .subscribe(
                 () => {
                     console.log('Update successful');
@@ -41,6 +42,6 @@ export class ProfileComponent {
       // ...our form is valid, we can submit the data
     }
   }
-  ngOnInit() {
-  }
+
+  ngOnInit() { }
 }
