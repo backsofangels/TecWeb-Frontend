@@ -3,12 +3,13 @@ import {AuthService} from '../AuthService';
 import {HttpClient} from '@angular/common/http';
 import {Drill} from '../model/drill.model';
 import {Measurement} from '../model/measurement.model';
-import {Pollutant} from "../model/pollutant.model";
+import {Pollutant} from '../model/pollutant.model';
 import {NgForm} from '@angular/forms';
-import {CookieService} from "ngx-cookie-service";
-import {Average} from "../model/average.model";
+import {CookieService} from 'ngx-cookie-service';
+import {Average} from '../model/average.model';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { tokenNotExpired } from 'angular2-jwt';
+import { error } from 'selenium-webdriver';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
         this.mindatefrom = new Date(event.value.getFullYear(),
             event.value.getMonth(), event.value.getDate() + 1);
     }
-    
+
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
 
@@ -78,16 +79,15 @@ export class HomeComponent implements OnInit {
         let firstName = JSON.parse(localStorage.getItem('user')).firstName;
         let lastName = JSON.parse(localStorage.getItem('user')).lastName;
         let email = JSON.parse(localStorage.getItem('user')).email;
-        let password = JSON.parse(localStorage.getItem('user')).password;
-        this.auth.update(ID, firstName, lastName, email, password)
+
+        this.auth.updateFavorite(ID, firstName, lastName, email)
             .subscribe(
                 () => {
-                    console.log('Update successful');
+                    console.log('Drill updated successfully');
                 },
                 (error) => {
                     console.log('Update failed');
                     console.log(error);
-//                    this.errorLogin = true;
                 }
             );
     }

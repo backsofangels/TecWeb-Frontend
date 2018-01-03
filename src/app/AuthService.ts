@@ -68,6 +68,18 @@ export class AuthService {
         });
     }
 
+    updateFavorite(drillID: number, firstName: string, lastName: string, email: string) {
+        const body = JSON.stringify({firstName: firstName, lastName: lastName, email: email, favoriteDrill: drillID});
+        console.log('body is ' + body);
+        return this.http.put('auth/update', body, {
+            responseType: 'text',
+            headers: {'Content-Type': 'application/json'}
+        }).do(() => {
+            const value: string = this.cookieService.get('jwt');
+            this.setSession(value);
+        });
+    }
+
     clearLocalStorage(): void {
         localStorage.removeItem('user');
         localStorage.removeItem('id_token');
