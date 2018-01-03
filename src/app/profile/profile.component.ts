@@ -20,6 +20,11 @@ export class ProfileComponent {
   email: string;
   password: string;
 
+  //le variabili da riempire per visualizzare il contenuto nell'html
+  firstname: string;
+  lastname: string;
+  emailuser: string;
+
   onSubmit(form: NgForm) {
     if (form.valid) {
         let drillID = JSON.parse(localStorage.getItem('user')).favoriteDrill;

@@ -7,32 +7,35 @@
     </legend>
     <table>
       <tr>
-        <td>Change Email</td>
+        <td>
+          La tua email: 
+        </td>
+        <td colspan="2" style="padding: 10px;">
+          {{emailuser}}
+        </td>
+      </tr>
+      <tr>
+        <td>Cambia Email</td>
         <td><input type="text" placeholder="New email" required
             [(ngModel)]="email" name="email" class="input"  
             #pickedEmail="ngModel"></td>
         <td><input type="text" placeholder="Repeat new email" required
             [(ngModel)]="email2" name="email" class="input" 
             #pickedEmail2="ngModel"></td>
-        <td *ngIf="email != email2">
-          Error
-        </td>
+        <td *ngIf="email != email2"> Le email non coincidono </td>
       </tr>
       <tr>
-        <td>Change password</td>
+        <td>Cambia password</td>
         <td><input type="password" placeholder="New password" required 
             [(ngModel)]="password" name="password" class="input"
             #pickedPassword="ngModel"></td>
         <td><input type="password" placeholder="Repeat new password" required 
             [(ngModel)]="password2" name="password" class="input" 
             #pickedpassword2="ngModel"></td>
-        <td *ngIf="password != password2">
-          Error
-        </td>
+        <td *ngIf="password != password2"> Le password non coincidono </td>
       </tr>
     </table>
     <br>
     <button type="submit" class="button-primary" [disabled]="!profileForm.form.valid"> Submit </button>
   </fieldset>
 </form>
-

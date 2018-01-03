@@ -1,21 +1,21 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-<fieldset id="innerContainer">
-  <legend><h1>Benvenuto!</h1></legend>
-  <div class="form-field">
-    <img src="./assets/images/userimage.png">
-    <input type="text" placeholder="Email" required
-      [(ngModel)]="email" name="email" class="input"  
-      #pickedEmail="ngModel">
-  </div>
-  <div class="form-field">
-    <img src="./assets/images/passwordimage.png">
-    <input type="password" placeholder="Password" required 
-            [(ngModel)]="password" name="password" class="input"
-            #pickedPassword="ngModel">
-  </div>
-  <div class="form-buttons">
-    <button type="submit" class="button-primary" [disabled]="!loginForm.form.valid"> Login </button>
-  </div>
-  <p *ngIf="errorLogin">Username o password non corretti</p>
-</fieldset>
+  <fieldset id="innerContainer">
+    <legend><h1>Benvenuto!</h1></legend>
+    <div class="form-field">
+      <img src="./assets/images/userimage.png">
+      <input type="text" placeholder="Email" required
+        [(ngModel)]="email" name="email" class="input"  
+        #pickedEmail="ngModel">
+    </div>
+    <div class="form-field">
+      <img src="./assets/images/passwordimage.png">
+      <input type="password" placeholder="Password" required 
+              [(ngModel)]="password" name="password" class="input"
+              #pickedPassword="ngModel">
+    </div>
+    <div class="form-buttons">
+      <button type="submit" class="button-primary" [disabled]="!loginForm.form.valid"> Login </button>
+    </div>
+    <p *ngIf="errorLogin">Username o password non corretti</p>
+  </fieldset>
 </form>

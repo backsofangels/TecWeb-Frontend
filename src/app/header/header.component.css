@@ -5,14 +5,6 @@
     left: 5%;
 }
 
-.centerDiv{
-    background-color: rgba(255, 255, 0, 0.3);
-    position: relative;
-    left: 25%;
-    width: 50%;
-    text-align: center;
-}
-
 .rightDiv{
     display: inline-block;
     position: absolute;
