@@ -51,11 +51,16 @@ export class AuthService {
         return this.http.get('get/drill/average', {params});
     }
 
-    update(drillID: number, firstName: string, lastName: string, email: string, password: string) {
-        const body = JSON.stringify({
-            firstName: firstName, lastName: lastName, email: email,
-            pwd: password, favoriteDrill: drillID
-        });
+    update(drillID: number, firstName: string, lastName: string, email: string, password?: string) {
+        let body;
+        if (password) {
+            body = JSON.stringify({
+                firstName: firstName, lastName: lastName, email: email,
+                pwd: password, favoriteDrill: drillID
+            });
+        } else {
+            body = JSON.stringify({firstName: firstName, lastName: lastName, email: email, favoriteDrill: drillID});
+        }
         return this.http.put('auth/update', body, {
             responseType: 'text',
             headers: {'Content-Type': 'application/json'}
@@ -63,23 +68,6 @@ export class AuthService {
             const value: string = this.cookieService.get('jwt');
             this.setSession(value);
         });
-    }
-
-    updateFavorite(drillID: number, firstName: string, lastName: string, email: string) {
-        const body = JSON.stringify({firstName: firstName, lastName: lastName, email: email, favoriteDrill: drillID});
-        console.log('body is ' + body);
-        return this.http.put('auth/update', body, {
-            responseType: 'text',
-            headers: {'Content-Type': 'application/json'}
-        }).do(() => {
-            const value: string = this.cookieService.get('jwt');
-            this.setSession(value);
-        });
-    }
-
-    clearLocalStorage(): void {
-        localStorage.removeItem('user');
-        localStorage.removeItem('id_token');
     }
 
     logout(): void {
@@ -96,12 +84,6 @@ export class AuthService {
             return false;
         }
     }
-
-    /*
-         getExpiration() {
-             const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-             return moment(expiresAt);
-         }   */
 
     public setSession(jwt: string): void {
         let jwtHelper: JwtHelper = new JwtHelper();

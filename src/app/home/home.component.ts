@@ -8,8 +8,6 @@ import {NgForm} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {Average} from '../model/average.model';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-import { tokenNotExpired } from 'angular2-jwt';
-import { error } from 'selenium-webdriver';
 
 
 @Component({
@@ -78,7 +76,7 @@ export class HomeComponent implements OnInit {
         let lastName = JSON.parse(localStorage.getItem('user')).lastName;
         let email = JSON.parse(localStorage.getItem('user')).email;
 
-        this.auth.updateFavorite(ID, firstName, lastName, email)
+        this.auth.update(ID, firstName, lastName, email)
             .subscribe(
                 () => {
                     console.log('Drill updated successfully');
