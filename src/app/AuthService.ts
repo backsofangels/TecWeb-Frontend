@@ -1,5 +1,5 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from './model/user.model';
 import 'rxjs/add/operator/do';
 import {JwtHelper, tokenNotExpired} from "angular2-jwt";
@@ -10,9 +10,6 @@ export class AuthService {
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
     }
-
-    // Utilizziamo questo evento per notificare l'header dello stato dell'utente (loggato oppure no)
-    @Output() getLoggedInStatus: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
     login(email: string, password: string) {
         return this.http.get('auth/login', {
@@ -77,10 +74,8 @@ export class AuthService {
 
     public isLoggedIn(): boolean {
         if (tokenNotExpired('id_token')) {
-            this.getLoggedInStatus.emit(true);
             return true;
         } else {
-            this.getLoggedInStatus.emit(false);
             return false;
         }
     }
