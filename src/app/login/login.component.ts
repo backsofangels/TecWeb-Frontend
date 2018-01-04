@@ -13,6 +13,8 @@ import {CookieService} from 'ngx-cookie-service';
 
 export class LoginComponent {
     private auth: AuthService = new AuthService(this.http, this.cookieService);
+    private loginOK = false;
+    private errorLogin = false;
 
     constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
     }
@@ -28,10 +30,14 @@ export class LoginComponent {
         this.auth.login(form.value.email, form.value.password)
             .subscribe(
                 () => {
+                    this.loginOK = true;
                     console.log('User is logged in');
-                    window.location.href = 'http://188.226.186.60';
+                    setTimeout(() => {
+                        window.location.href = 'http://188.226.186.60'
+                    }, 3000);
                 },
                 (error) => {
+                    this.errorLogin = true;
                     console.log('User log failed');
                     console.log(error);
                 }
