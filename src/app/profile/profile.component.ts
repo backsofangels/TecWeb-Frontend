@@ -12,7 +12,6 @@ import {CookieService} from "ngx-cookie-service";
 export class ProfileComponent {
     private auth: AuthService = new AuthService(this.http, this.cookieService);
     private updateOk: boolean = false;
-    private errorUpdate: boolean = false;
 
     constructor(private http: HttpClient, private cookieService: CookieService) { }
 
@@ -35,7 +34,6 @@ export class ProfileComponent {
                     this.updateOk = true;
                 },
                 (error) => {
-                    this.errorUpdate = true;
                     console.log('Update failed');
                     console.log(error);
                 }
