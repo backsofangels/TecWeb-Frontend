@@ -34,7 +34,7 @@ export class LoginComponent {
                     console.log('User is logged in');
                     setTimeout(() => {
                         window.location.href = 'http://188.226.186.60'
-                    }, 3000);
+                    }, 2000);
                 },
                 (error) => {
                     this.errorLogin = true;
