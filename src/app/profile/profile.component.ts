@@ -26,7 +26,6 @@ export class ProfileComponent {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-        console.log(form.value.password);
         let parsed = JSON.parse(localStorage.getItem('user'));
         this.auth.update(parsed.favoriteDrill, parsed.firstName, parsed.lastName, parsed.email, form.value.password)
             .subscribe(

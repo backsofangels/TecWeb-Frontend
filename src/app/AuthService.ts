@@ -12,7 +12,6 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        console.log('Password is' + password);
         return this.http.get('auth/login', {
             responseType: 'text',
             headers: {'Authorization': 'Basic ' + btoa(email + ':' + password)}
@@ -51,7 +50,6 @@ export class AuthService {
 
     update(drillID: number, firstName: string, lastName: string, email: string, password?: string) {
         let body;
-        console.log('Password is ' + password);
         if (password) {
             body = JSON.stringify({
                 firstName: firstName, lastName: lastName, email: email,
